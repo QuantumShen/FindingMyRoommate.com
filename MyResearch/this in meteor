@@ -1,0 +1,112 @@
+{
+    _session: {
+        options: [Object],
+        server: {
+            id: 'PcQq5wBiH46Et9mLn',
+            onConnectionHook: [Object],
+            publish_handlers: [Object],
+            universal_publish_handlers: [Object],
+            method_handlers: [Object],
+            sessions: [Object],
+            stream_server: [Object]
+        },
+        version: '1',
+        initialized: false,
+        socket: {
+            _session: [Object],
+            id: 'd92c0a40-9fc7-4017-92d5-c266893b87d1',
+            headers: [Object],
+            prefix: '/sockjs',
+            remoteAddress: '127.0.0.1',
+            remotePort: 57653,
+            address: [Object],
+            url: '/sockjs/490/o7j98dof/websocket',
+            pathname: '/sockjs/490/o7j98dof/websocket',
+            protocol: 'websocket',
+            send: [Function],
+            _events: [Object],
+            _meteorSession: [Circular]
+        },
+        inQueue: {
+            '0': undefined,
+            '1': undefined,
+            '2': undefined,
+            '3': undefined,
+            '4': undefined,
+            _capacity: 16,
+            _length: 0,
+            _front: 5
+        },
+        blocked: false,
+        workerRunning: true,
+        _namedSubs: {
+            '9WuRJQQGq5EoLoLEM': [Object],
+            BGor6RjzQfWv674pt: [Object],
+            Y7TdfTpaDjTz3TFAh: [Object],
+            QM8kBWHbgztJdASWG: [Circular]
+        },
+        _universalSubs: [
+            [Object]
+        ],
+        userId: 'QqFusLkL8Gpv9HrbQ',
+        collectionViews: {
+            users: [Object],
+            meteor_autoupdate_clientVersions: [Object],
+            'MeteorToys.Impersonate': [Object]
+        },
+        _isSending: true,
+        _dontStartNewUniversalSubs: false,
+        _pendingReady: [],
+        _closeCallbacks: [
+            [Function]
+        ],
+        _socketUrl: '/sockjs/490/o7j98dof/websocket',
+        _respondToPings: true,
+        connectionHandle: {
+            id: 'PcQq5wBiH46Et9mLn',
+            close: [Function],
+            onClose: [Function],
+            clientAddress: '127.0.0.1',
+            httpHeaders: [Object]
+        },
+        heartbeat: {
+            heartbeatInterval: 15000,
+            heartbeatTimeout: 15000,
+            _sendPing: [Function],
+            _onTimeout: [Function],
+            _seenPacket: true,
+            _heartbeatIntervalHandle: [Object],
+            _heartbeatTimeoutHandle: null
+        }
+    },
+    connection: {
+        id: 'PcQq5wBiH46Et9mLn',
+        close: [Function],
+        onClose: [Function],
+        clientAddress: '127.0.0.1',
+        httpHeaders: {
+            'x-forwarded-for': '127.0.0.1',
+            host: 'localhost:3000',
+            'user-agent': 'Mozilla/5.0 (Windows NT 6.1;
+            Win64;x64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 51.0 .2704 .63 Safari / 53
+        7.36 ',
+        'accept-language': 'en-US,en;q=0.8'
+    }
+},
+_handler: [Function],
+    _subscriptionId: 'QM8kBWHbgztJdASWG',
+    _name: 'recipes',
+    _params: [],
+    _subscriptionHandle: 'NQM8kBWHbgztJdASWG',
+    _deactivated: false,
+    _stopCallbacks: [],
+    _documents: {},
+    _ready: false,
+    userId: 'QqFusLkL8Gpv9HrbQ',
+    _idFilter: {
+        idStringify: [Function],
+        idParse: [Fu
+            nction
+        ]
+    }
+}
