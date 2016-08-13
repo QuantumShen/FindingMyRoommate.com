@@ -1,43 +1,54 @@
 <template name="HomeLayout">
-    {{> Header}}
-    <main>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 service-entrance">
-                    <div class="service-entrance-box">
-                        <a class="service-entrance-link" href="/rides">
-                            <img src="/images/share-a-ride.png" title="Share a Ride">
-                            <h4 title="Share A Ride">Share A Ride <span class="chinese-translation"> 拼车 </span></h4>
+    <div class="home-body">
+        {{> Header}}
 
-                            <p class="service-info"> Start or join a ride share</p>
-                            <p class="chinese-translation">发布或寻找拼车信息</p>
-                            <p><span class="caution">Active Rides</span> <span class="number">10</span><!-- @TODO: DB count query  --></p>
-                        </a>
-                    </div>
+        <section class="description">
+            <div class="container">
+                <div class="row">
+                    <h1>Easier to Find Roommates and Apartments</h1>
+                    <h2>Inspired by <span class="chinese">"普渡找房找室友群"</span>. <br>Faster to Post and Search Information</h2>
                 </div>
-                <div class="col-md-4 service-entrance">
-                    <div class="service-entrance-box">
-                        <a class="service-entrance-link" href="/roommates">
-                            <img src="/images/share-a-ride.png" title="Find Roommates">
-                            <h4 title="Find Roommates">Find Roommates <span class="chinese-translation"> 找室友 </span></h4>
-                            <p class="service-info"> Start or join a roommates group </p>
-                            <p class="chinese-translation"> 找室友一起租房子</p>
-                            <p><span class="caution">Active Groups</span> <span class="number">10</span><!-- @TODO: DB count query  --></p>
-                        </a>
+            </div>
+        </section>
+        <section class="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 service-entrance">
+                        <div class="service-entrance-box">
+                            <a class="service-entrance-link" href="/rides">
+                                <img src="/images/share-a-ride.png" title="Share a Ride">
+                                <h4 title="Share A Ride">Share A Ride <span class="chinese"> 拼车 </span></h4>
+
+                                <p class="service-info"> Start or join a ride share</p>
+                                <p class="chinese">发布或寻找拼车信息</p>
+                                <p><span class="caution">Active Rides</span> <span class="number">10</span><!-- @TODO: DB count query  --></p>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4 service-entrance">
-                    <div class="service-entrance-box">
-                        <a class="service-entrance-link" href="/sublease">
-                            <img src="/images/share-a-ride.png" title="Sublease Information">
-                            <h4 title="Post Sublease Information">Sublease Information <span class="chinese-translation"> 转租 </span></h4>
-                            <p class="service-info"> Provide or require sublease </p>
-                            <p class="chinese-translation"> 提供转租或寻求转租 </p>
-                            <p><span class="caution">Active Subleases</span> <span class="number">10</span><!-- @TODO: DB count query  --></p>
-                        </a>
+                    <div class="col-md-4 service-entrance">
+                        <div class="service-entrance-box">
+                            <a class="service-entrance-link" href="/roommates">
+                                <img src="/images/share-a-ride.png" title="Find Roommates">
+                                <h4 title="Find Roommates">Find Roommates <span class="chinese"> 找室友 </span></h4>
+                                <p class="service-info"> Start or join a roommates group </p>
+                                <p class="chinese"> 找室友一起租房子</p>
+                                <p><span class="caution">Active Groups</span> <span class="number">10</span><!-- @TODO: DB count query  --></p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 service-entrance">
+                        <div class="service-entrance-box">
+                            <a class="service-entrance-link" href="/sublease">
+                                <img src="/images/share-a-ride.png" title="Sublease Information">
+                                <h4 title="Post Sublease Information">Sublease Information <span class="chinese"> 转租 </span></h4>
+                                <p class="service-info"> Provide or require sublease </p>
+                                <p class="chinese"> 提供转租或寻求转租 </p>
+                                <p><span class="caution">Active Subleases</span> <span class="number">10</span><!-- @TODO: DB count query  --></p>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </section>
+    </div>
 </template>

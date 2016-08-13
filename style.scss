@@ -1,81 +1,162 @@
-.service-entrance{
+$bootstrap-blue: #23527c;
 
-    .service-entrance-box{
-        width: 290px;
-        padding: 20px;
-        margin: 0 auto;
-        -webkit-transition: all 1s ease;
-           -moz-transition: all 1s ease;
-            -ms-transition: all 1s ease;
-             -o-transition: all 1s ease;
-                transition: all 1s ease;
-        &:hover{
-            box-shadow: 0 3px 10px rgba(0,0,0,.2);
-        }
-    }
-    
-    .service-info{
-        min-height: 17px;
+
+.home-body{
+    position: absolute; //can not use body since the css are shared by all html, so simulate body
+    width: 100%;
+    min-height: 100%;
+    background: url('/images/home-bg.jpg');
+    background-size: cover;
+
+    .chinese{
+        font-family: 'STHeiti', 'Microsoft YaHei';
     }
 
-    a {
-        display: inline-block;
-        max-width: 250px;
-        text-decoration: none;
-        &:hover{
-            text-decoration: none;
+    nav.navbar{
+        .icon-bar {
+            background-color:white;
         }
-        img {
-            width: 100%;
-            height: 100%;
-            border: 1px solid #ccc;
-            min-width: 250px;
-            min-height: 181px;
+
+        .navbar-brand{
+            padding: 5px 20px 5px 10px;
+            img{
+                -webkit-filter: invert(100%);
+                filter: invert(100%);
+                width: 220px;
+            }
         }
-        h4 {
-            font-size: 20px;
-            color: #333;
-            margin: 18px 0 10px 0;
-            height: 18px;
-            line-height: 18px;
-            color: #14191e;
-            text-align: center;
-            white-space: nowrap;
+        margin: 0;
+
+        li{
+            a{
+                font-size: 16px;
+                color: white;
+                &:hover{
+                    border-color: #000;
+                    color: $bootstrap-blue;
+                }
+            }
         }
-        p {
+        
+        li.login, li.logout{
+            margin: 0 10px 0 10px;
+            a{
+                text-align: center;
+                border: 1px solid white;
+                border-radius: 4px;
+                font-size: 18px;
+                padding: 12px;
+                color: white;
+
+                &:hover{
+                    border-color: #000;
+                    color: $bootstrap-blue;
+                }
+
+
+            }
+            
+        }
+
+
+    }
+
+    section.description{
+        text-align: center;
+
+        h1 {
             margin: 0;
-            padding: 0;
-            font-size: 15px;
-            color: #909090;
-            margin: 8px 0;
-            text-align: center;
-            white-space: nowrap;
+            font-size: 3em;
+            padding: 1em 0 .5em 0;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 2em;
+            padding-bottom: 1em;
+        }
+
+        color: white;
+    }
+
+
+    section.main{
+        .service-entrance{
+            .service-entrance-box{
+
+                background-color: rgba(255,255,255,0.7);
+                width: 290px;
+                padding: 20px;
+                margin: 0 auto;
+                -webkit-transition: all 0.1s ease;
+                -moz-transition: all 0.1s ease;
+                -ms-transition: all 0.1s ease;
+                -o-transition: all 0.1s ease;
+                transition: all 0.1s ease;
+                &:hover{
+                    box-shadow: 0 3px 10px rgba(255,255,255,0.7);
+                }
+            }
+            
+            .service-info{
+                min-height: 17px;
+            }
+
+            a {
+                display: inline-block;
+                max-width: 250px;
+                text-decoration: none;
+                &:hover{
+                    text-decoration: none;
+                }
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border: 1px solid #ccc;
+                    min-width: 250px;
+                    min-height: 181px;
+                }
+                h4 {
+                    font-size: 20px;
+                    color: #000;
+                    margin: 18px 0 10px 0;
+                    height: 18px;
+                    line-height: 18px;
+                    text-align: center;
+                    white-space: nowrap;
+                }
+                p {
+                    margin: 0;
+                    padding: 0;
+                    font-size: 16px;
+                    color: $bootstrap-blue;
+                    margin: 8px 0;
+                    text-align: center;
+                    white-space: nowrap;
+
+                    .caution{
+
+                        border: 1px solid teal;
+                        border-radius: 5px;
+                        background-color: teal;
+                        color: white;
+                        padding:5px;
+                    }
+                    .number{
+                        color: red;
+                        font-size: 120%;
+
+                    }
+                }
+            }
 
             .caution{
-
                 border: 1px solid teal;
                 border-radius: 5px;
                 background-color: teal;
                 color: white;
                 padding:5px;
             }
-            .number{
-                color: red;
-                font-size: 120%;
-
-            }
         }
     }
-
-    .chinese-translation{
-        font-family: 'STHeiti', 'Microsoft YaHei';
-    }
-
-    .caution{
-        border: 1px solid teal;
-        border-radius: 5px;
-        background-color: teal;
-        color: white;
-        padding:5px;
-    }
-} 
+}
