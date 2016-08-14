@@ -1,0 +1,20 @@
+<template name="ServiceEntrance">
+    <div class="container">
+        <div class="row">
+            {{#each services}}
+            <div class="col-md-4 service-entrance">
+                <div class="service-entrance-box">
+                    <a class="service-entrance-link" href={{path}}>
+                        <img src={{imgPath}} title={{title}}>
+                        <h4 title={{title}}>{{title}}<span class="chinese"> {{chineseTitle}} </span></h4>
+
+                        <p class="service-info"> {{description}}</p>
+                        <p class="chinese">{{chineseDescription}}</p>
+                        <p><span class="caution">{{activeName}}</span> <span class="number">{{activeNumber}}</span></p>
+                    </a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</template>

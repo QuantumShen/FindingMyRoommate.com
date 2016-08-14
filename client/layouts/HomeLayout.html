@@ -1,7 +1,6 @@
 <template name="HomeLayout">
     <div class="home-body">
         {{> Header}}
-
         <section class="description">
             <div class="container">
                 <div class="row">
@@ -10,45 +9,9 @@
                 </div>
             </div>
         </section>
-        <section class="main">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 service-entrance">
-                        <div class="service-entrance-box">
-                            <a class="service-entrance-link" href="/rides">
-                                <img src="/images/share-a-ride.png" title="Share a Ride">
-                                <h4 title="Share A Ride">Share A Ride <span class="chinese"> 拼车 </span></h4>
 
-                                <p class="service-info"> Start or join a ride share</p>
-                                <p class="chinese">发布或寻找拼车信息</p>
-                                <p><span class="caution">Active Rides</span> <span class="number">10</span><!-- @TODO: DB count query  --></p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 service-entrance">
-                        <div class="service-entrance-box">
-                            <a class="service-entrance-link" href="/roommates">
-                                <img src="/images/share-a-ride.png" title="Find Roommates">
-                                <h4 title="Find Roommates">Find Roommates <span class="chinese"> 找室友 </span></h4>
-                                <p class="service-info"> Start or join a roommates group </p>
-                                <p class="chinese"> 找室友一起租房子</p>
-                                <p><span class="caution">Active Groups</span> <span class="number">10</span><!-- @TODO: DB count query  --></p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 service-entrance">
-                        <div class="service-entrance-box">
-                            <a class="service-entrance-link" href="/sublease">
-                                <img src="/images/share-a-ride.png" title="Sublease Information">
-                                <h4 title="Post Sublease Information">Sublease Information <span class="chinese"> 转租 </span></h4>
-                                <p class="service-info"> Provide or require sublease </p>
-                                <p class="chinese"> 提供转租或寻求转租 </p>
-                                <p><span class="caution">Active Subleases</span> <span class="number">10</span><!-- @TODO: DB count query  --></p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <section class="main">
+            {{> ServiceEntrance}}
         </section>
     </div>
 </template>

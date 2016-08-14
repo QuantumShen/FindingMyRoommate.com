@@ -32,7 +32,7 @@ aldeed:collection2
 aldeed:autoform
 accounts-base
 accounts-password
-useraccounts:unstyled
+useraccounts:bootstrap
 
 matb33:bootstrap-glyphicons
 zimme:active-route
