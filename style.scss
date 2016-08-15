@@ -3,6 +3,19 @@ $bootstrap-blue: #23527c;
 .chinese{
     font-family: 'STHeiti', 'Microsoft YaHei';
 }
+.center{
+    display: table;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.submit-btn{
+    margin: 5px;
+    min-width: 200px;
+    font-size: 18px;
+}
+
 nav.navbar{
     background-color: #012178;
 
@@ -52,6 +65,13 @@ nav.navbar{
 
     }
 }
+
+
+.btn-group{
+    padding: 15px;
+}
+
+
 
 
 .home-body{

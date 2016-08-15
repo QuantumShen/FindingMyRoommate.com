@@ -1,5 +1,5 @@
 Meteor.publish('AllRides', function(){
-	return Rides.find({active: true});
+	return Rides.find({effective: true});
 });
 
 Meteor.publish('MyRides', function(){

@@ -18,9 +18,3 @@ Template.Rides.events({
 });
 
 
-//I just put NewRide template and its js inside Rides
-Template.NewRide.events({
-    'click .fa-close': function() {
-        Session.set('newRide', false);
-    }
-});

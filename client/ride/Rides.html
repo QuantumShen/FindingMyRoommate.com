@@ -1,31 +1,24 @@
 <template name="Rides">
-
-    {{#if $.Session.get 'newRide'}}
-        {{> NewRide}}
-    {{else}}
-        <button class="btn btn-default new-ride-js">Provide a New Ride Share</button>
-    {{/if}} 
-    
-    <section class="rides-list">
-        {{#if Template.subscriptionsReady}}
-            {{#each rides}}
-                {{> Ride}}
-            {{else}}
-                <p> No Active Rids Now ... </p>
-            {{/each}}
-        {{else}}
-            {{> spinner}}
-        {{/if}}
-    </section>
-
-
-
-</template>
-
-
-<template name="NewRide">
     <div class="container">
-        <i class="fa fa-close"></i>
-        {{> quickForm collection="Rides" id="insertNewRideForm" type="insert" class="new-ride-form"}}
+        {{#if $.Session.get 'newRide'}}
+            {{> NewRide}}
+        {{else}}
+            <button class="btn btn-primary submit-btn new-ride-js">Provide a New Ride Share</button>
+        {{/if}} 
+
+        <section class="rides-list">
+            {{#if Template.subscriptionsReady}}
+                {{#each rides}}
+                    {{> Ride}}
+                {{else}}
+                    <p> No Active Rids Now ... </p>
+                {{/each}}
+            {{else}}
+                {{> spinner}}
+            {{/if}}
+        </section>
+
     </div>
 </template>
+
+
