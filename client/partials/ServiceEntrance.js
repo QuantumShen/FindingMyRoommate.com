@@ -25,7 +25,7 @@ Template.ServiceEntrance.helpers({
             title: "Sublease Information",
             chineseTitle: "转租",
             description:"Provide or ask for sublease",
-            chineseDescription: "发布或寻找拼车信息",
+            chineseDescription: "提供或寻找转租",
             activeName: "Active Subleases",
             activeNumber: 10, //todo
         },

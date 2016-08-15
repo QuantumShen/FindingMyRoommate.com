@@ -2,6 +2,7 @@ Rides = new Mongo.Collection('rides');
 
 Rides.allow({
 	insert: function(userId, doc) {
+		console.log("check insert");
 		return !!userId;
 	},
 	update: function(userId, doc) {

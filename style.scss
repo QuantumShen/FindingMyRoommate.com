@@ -1,5 +1,58 @@
 $bootstrap-blue: #23527c;
 
+.chinese{
+    font-family: 'STHeiti', 'Microsoft YaHei';
+}
+nav.navbar{
+    background-color: #012178;
+
+    .icon-bar {
+        background-color:white;
+    }
+
+    .navbar-brand{
+        padding: 5px 20px 5px 10px;
+
+        img{
+            -webkit-filter: invert(100%);
+            filter: invert(100%);
+            width: 220px;
+        }
+    }
+    margin: 0;
+
+    li{
+        a{
+            font-size: 16px;
+            color: white;
+            &:hover{
+                border-color: #000;
+                color: $bootstrap-blue;
+            }
+        }
+    }
+
+    li.login, li.logout{
+        margin: 0 10px 0 10px;
+        a{
+            text-align: center;
+            border: 1px solid white;
+            border-radius: 4px;
+            font-size: 18px;
+            padding: 12px;
+            color: white;
+
+            &:hover{
+                border-color: #000;
+                color: $bootstrap-blue;
+            }
+
+
+        }
+
+    }
+}
+
 
 .home-body{
     position: absolute; //can not use body since the css are shared by all html, so simulate body
@@ -8,57 +61,8 @@ $bootstrap-blue: #23527c;
     background: url('/images/home-bg.jpg');
     background-size: cover;
 
-    .chinese{
-        font-family: 'STHeiti', 'Microsoft YaHei';
-    }
-
     nav.navbar{
-        .icon-bar {
-            background-color:white;
-        }
-
-        .navbar-brand{
-            padding: 5px 20px 5px 10px;
-            img{
-                -webkit-filter: invert(100%);
-                filter: invert(100%);
-                width: 220px;
-            }
-        }
-        margin: 0;
-
-        li{
-            a{
-                font-size: 16px;
-                color: white;
-                &:hover{
-                    border-color: #000;
-                    color: $bootstrap-blue;
-                }
-            }
-        }
-        
-        li.login, li.logout{
-            margin: 0 10px 0 10px;
-            a{
-                text-align: center;
-                border: 1px solid white;
-                border-radius: 4px;
-                font-size: 18px;
-                padding: 12px;
-                color: white;
-
-                &:hover{
-                    border-color: #000;
-                    color: $bootstrap-blue;
-                }
-
-
-            }
-            
-        }
-
-
+        background-color: transparent;
     }
 
     section.description{
@@ -82,6 +86,7 @@ $bootstrap-blue: #23527c;
 
     section.main{
         .service-entrance{
+            margin-bottom: 20px;
             .service-entrance-box{
 
                 background-color: rgba(255,255,255,0.7);
@@ -95,6 +100,7 @@ $bootstrap-blue: #23527c;
                 transition: all 0.1s ease;
                 &:hover{
                     box-shadow: 0 3px 10px rgba(255,255,255,0.7);
+                    background-color: rgba(255,255,255,0.8);
                 }
             }
             
