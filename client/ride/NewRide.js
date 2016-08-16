@@ -1,58 +1,90 @@
 Template.NewRide.onCreated(function() {
-  this.roundTrip = new ReactiveVar(true);  //this is the template instance
+  this.roundTrip = new ReactiveVar(false);  //this is the template instance
+  this.ckResult = new ReactiveVar(true);
 });
 
-Template.NewRide.events({
-    'click .fa-taxi': function(events,template) {
-        template.roundTrip.set(false);
-    },
-    'click .fa-refresh': function(events,template) {
-        template.roundTrip.set(true);
-    },
-
-    'submit .add-ride-js': function(event, template){
-        if(Meteor.user()){
-            //let rountTrip = template.roundTrip.get();
-            // console.log(event.target.date1.value instanceof Date); //false
-            // console.log(typeof event.target.date1.value); //string
-
-            Rides.insert({
-                rountTrip: template.roundTrip.get(),
-                trip1:{
-                    from: event.target.from1.value,
-                    to: event.target.to1.value,
-                    date: new Date(event.target.date1.value),
-                    time: event.target.time1.value,
-                    comment: event.target.comment1.value
-                },
-                trip2:(()=>{
-                    if(template.roundTrip.get()){
-                        return {
-                            from: event.target.from2.value,
-                            to: event.target.to2.value,
-                            date: new Date(event.target.date2.value),
-                            time: event.target.time2.value,
-                            comment: event.target.comment2.value
-                        };
-                    }else{
-                        return {};
-                    }
-                })(),
-                createdAt: new Date(),
-                createdById: Meteor.userId(),
-                effective: true,
-                lastEffectiveDay: (()=>{
-                    if(template.roundTrip.get()){
-                        return new Date(event.target.date2.value);
-                    }else{
-                        return new Date(event.target.date1.value);
-                    }
-                })()
-            });
+function checkStringNotEmpty(str, result){
+    try{
+        check(str, String);
+        if(str.length === 0){
+            result.set(false);
         }
-        Session.set('newRide', false);
+        result.set(true);
+        return str;
+    }catch(e){
+        console.log(e.message);
+        result.set(false);
+        return "";
+    }
+
+}
+
+Template.NewRide.events({
+    'click .fa-taxi': function(events,instance) {
+        instance.roundTrip.set(false);
+    },
+    'click .fa-refresh': function(events,instance) {
+        instance.roundTrip.set(true);
+    },
+
+    'submit .add-ride-js': function(event, instance){
+        event.preventDefault();
+        if(Meteor.user()){
+            var t = event.target;
+            var ckResult = instance.ckResult;
+            var doc = {
+                roundTrip: instance.roundTrip.get(),
+                trip1:{
+                    from: checkStringNotEmpty(t.from1.value, ckResult),
+                    to: checkStringNotEmpty(t.to1.value, ckResult),
+                    date: new Date(checkStringNotEmpty(t.date1.value, ckResult)),
+                    time: checkStringNotEmpty(t.time1.value, ckResult),
+                    comment: event.target.comment1.value
+                }
+            };
+            if(doc.roundTrip){
+                doc.trip2 = {
+                    from: checkStringNotEmpty(t.from2.value, ckResult),
+                    to: checkStringNotEmpty(t.to2.value, ckResult),
+                    date: new Date(checkStringNotEmpty(t.date2.value, ckResult)),
+                    time: checkStringNotEmpty(t.time2.value, ckResult),
+                    comment: event.target.comment2.value
+                };
+            }
+
+            if(!ckResult.get()){
+                Bert.alert( 'All required fields should be filled!', 'danger', 'fixed-top', 'fa-frown-o' );
+                return false;
+            }
+
+            var effectiveTo = doc.trip1.date;
+            
+            if(doc.trip2 && doc.trip1.date<doc.trip2.date){
+                effectiveTo = doc.trip2.date;
+            }
+
+           
+            doc.effectiveTo = new Date(effectiveTo);
+            doc.effectiveTo.setDate(doc.effectiveTo.getDate()+1);
+
+            console.log(doc.trip1.date);
+            console.log(doc.effectiveTo);
+    
+            Meteor.call('insertRide', doc, function(error, result){
+                if(error || !result){
+                    Bert.alert( 'Sorry for Internal Error. Please tell me: support@findingmyroommate.com', 'danger', 'fixed-top', 'fa-frown-o' );
+                    return false;
+                }
+            });
+            Session.set('newRide', false);
+            Bert.alert( 'Successfully Published', 'success', 'fixed-top', 'fa-smile-o' );
+        }//end if
+
+
         return false; //no default submit
     },
+
+
     'click .cancel-new-ride-js': () => {
         Session.set('newRide', false);
     }

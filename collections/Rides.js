@@ -9,96 +9,121 @@ Rides.allow({
 	}
 });
 
-// Trip = new SimpleSchema({
-// 	from: {
-// 		type: String,
-// 		label: "From" 
-// 	},
-// 	desti: {
-// 		type: String,
-// 		label: "Destination"
-// 	},
-// 	departAt: {
-// 		type: Date,
-// 		label: "Departure Time"
-// 	}
-// });
+Trip = new SimpleSchema({
+	from: {
+		type: String,
+		label: "From" ,
+        max: 100
+	},
+	to: {
+		type: String,
+		label: "To",
+        max: 100
+	},
+	date: {
+		type: Date,
+		label: "Date"
+	},
+    time:{
+        type: String,
+        label: "To",
+        max: 100
+    },
+    comment:{
+        type: String,
+        label: "Comment",
+        optional: true,
+        max: 300
+    }
+});
 
-// Talk = new SimpleSchema({
-// 	replyTo: {
-// 		type: String,   //will be the userId to reply to 
-// 		label: "ReplyTo"  
-// 	},
-// 	text: {
-// 		type: String,
-// 		label: "Talking Text"
-// 	},
-// 	createdAt:{
-// 		type: Date,
-// 		label: "Created At",
-// 		autoValue: function() {
-// 			return new Date();
-// 		},
-// 	}
+Talk = new SimpleSchema({
+	replyTo: {
+		type: String,   //will be the userId to reply to 
+		label: "ReplyTo"  ,
+        max: 50,
+	},
+	text: {
+		type: String,
+		label: "Talking Text",
+        max: 200,
+	},
+	createdAt:{
+		type: Date,
+		label: "Created At",
+		autoValue: function() {
+			return new Date();
+		},
+	}
 
-// });
+});
 
 
-// RidesSchema = new SimpleSchema({
-// 	trips: {
-// 		type: [Trip]  //Trip array
-// 	},
-// 	// talks: {
-// 	// 	type: [Talk],
-// 	// 	autoform: {
-// 	// 		type: "hidden"
-// 	// 	}
-// 	// },
-// 	active: {
-// 		type: Boolean,
-// 		defaultValue: true
-// 	},
-// 	organiser: {
-// 		type: String,
-// 		label: "Organiser",
-// 		autoValue: function () {
-// 			return this.userId;
-// 		},
-// 		autoform: {
-// 			type: "hidden"
-// 		}
-// 	},
-// 	createdAt: {
-// 		type: Date,
-// 		label: "Created At",
-// 		autoValue: function() {
-// 			return new Date();
-// 		},
-// 		autoform: {
-// 			type: "hidden"
-// 		}
-// 	},
-// 	likes: {
-// 		type: Number,
-// 		label: "Count of likes",
-// 		autoValue: ()=>0,
-// 		autoform: {
-// 			type: "hidden"
-// 		}
-// 	}
-// });
 
-// Meteor.methods({
-// 	toggleActiveState: function(id, currentState){
-// 		Rides.update(id, {
-// 			$set: {
-// 				active: !currentState
-// 			}
-// 		});
-// 	},
-// 	deleteRide: function(id){
-// 		Rides.remove(id);
-// 	}
-// });
 
-// Rides.attachSchema(RidesSchema);
+RidesSchema = new SimpleSchema({
+	trip1: {
+		type: Trip  //Trip array
+	},
+    trip2: {
+        type: Trip,  //Trip array
+        optional: true
+    },
+
+    effective:{
+        type: Boolean,
+        label: "Effectiveness",
+        autoValue: function(){
+            var effectiveTo = this.field('effectiveTo').value;
+            if(effectiveTo >= (new Date())){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    },
+
+	roundTrip: {
+		type: Boolean,
+        label: "Round trip or not"
+	},
+
+    effectiveTo:{
+        type: Date,
+        label: "Last effective day"
+    },
+
+	creater: {
+		type: String,
+		label: "Creater ID",
+		autoValue: function () {
+            //console.log(this);
+			return Meteor.userId();
+            //return this.userId;
+		}
+	},
+	createdAt: {
+		type: Date,
+		label: "Created At",
+		autoValue: function() {
+			return new Date();
+		},
+	},
+
+    //Two experiments
+	likes: {
+		type: Number,
+		label: "Count of likes",
+		autoValue: ()=>0,
+	},
+    talks: {
+        type: [Talk],
+        optional: true
+    },
+});
+
+
+Rides.attachSchema(RidesSchema);
+
+
+
