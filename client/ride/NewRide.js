@@ -29,15 +29,18 @@ Template.NewRide.events({
 
     'submit .add-ride-js': function(event, instance){
         event.preventDefault();
+
         if(Meteor.user()){
             var t = event.target;
+
             var ckResult = instance.ckResult;
             var doc = {
                 roundTrip: instance.roundTrip.get(),
                 trip1:{
                     from: checkStringNotEmpty(t.from1.value, ckResult),
                     to: checkStringNotEmpty(t.to1.value, ckResult),
-                    date: new Date(checkStringNotEmpty(t.date1.value, ckResult)),
+                    date: new Date(checkStringNotEmpty(t.date1.value+"T00:00:00-04:00", ckResult)),
+                    //should add time and zone, otherwise it will be UTC00:00
                     time: checkStringNotEmpty(t.time1.value, ckResult),
                     comment: event.target.comment1.value
                 }
@@ -46,7 +49,7 @@ Template.NewRide.events({
                 doc.trip2 = {
                     from: checkStringNotEmpty(t.from2.value, ckResult),
                     to: checkStringNotEmpty(t.to2.value, ckResult),
-                    date: new Date(checkStringNotEmpty(t.date2.value, ckResult)),
+                    date: new Date(checkStringNotEmpty(t.date2.value+"T00:00:00-04:00", ckResult)),
                     time: checkStringNotEmpty(t.time2.value, ckResult),
                     comment: event.target.comment2.value
                 };
@@ -57,18 +60,15 @@ Template.NewRide.events({
                 return false;
             }
 
-            var effectiveTo = doc.trip1.date;
+            var activeTo = doc.trip1.date;
             
             if(doc.trip2 && doc.trip1.date<doc.trip2.date){
-                effectiveTo = doc.trip2.date;
+                activeTo = doc.trip2.date;
             }
 
            
-            doc.effectiveTo = new Date(effectiveTo);
-            doc.effectiveTo.setDate(doc.effectiveTo.getDate()+1);
-
-            console.log(doc.trip1.date);
-            console.log(doc.effectiveTo);
+            doc.activeTo = new Date(activeTo);
+            doc.activeTo.setDate(doc.activeTo.getDate()+1); //active to the end of the day
     
             Meteor.call('insertRide', doc, function(error, result){
                 if(error || !result){

@@ -1,11 +1,11 @@
 <template name="NewRide">
   <div class="container">
-      <button class="btn normal-btn {{btnSingleTrip}} fa fa-taxi"> Single Trip <span class="chinese">单程</span></button>
-      <button class="btn normal-btn {{btnRoundTrip}} fa fa-refresh"> Round Trip <span class="chinese">往返</span></button>    
+    <button class="btn normal-btn {{btnSingleTrip}} fa fa-taxi"> Single Trip <span class="chinese">单程</span></button>
+    <button class="btn normal-btn {{btnRoundTrip}} fa fa-refresh"> Round Trip <span class="chinese">往返</span></button>    
     
     <form class="add-ride-js">
 
-      <div class="row">
+      <div class="row add-margin-top">
         <div class="{{col}}">
           <div class="panel panel-primary">
             <div class="panel-heading">To Trip <span class="chinese">去程</span></div>
@@ -29,7 +29,7 @@
 
               <div class="form-group">
                 <label for="comment1">Comment:</label>
-                <textarea class="form-control" id="comment1" placeholder="Any comment you want to tell the public" name="comment1"></textarea>
+                <textarea class="form-control" id="comment1" placeholder="Any comment you want to tell the public. e.g. price or free, your gender, smoke or not, etc." name="comment1"></textarea>
               </div>
             </div>
           </div>
@@ -59,24 +59,27 @@
 
               <div class="form-group">
                 <label for="comment2">Comment:</label>
-                <textarea class="form-control" id="comment2" placeholder="Any comment you want to tell the public" name="comment2"></textarea>
+                <textarea class="form-control" id="comment2" placeholder="Any comment you want to tell the public. e.g. price or free, your gender, smoke or not, etc." name="comment2"></textarea>
               </div>
             </div>
           </div>
         </div>
         {{/if}}
         <div class="left">
-        <i class="required"></i><em>required</em>
+          <i class="required"></i><em>required</em>
         </div>
       </div>
-      <div class="row">
+      <div class="row add-margin-top">
         <div class="center">
 
           <div class="form-group">
             <label for="contact">Contact (besides Website Internal Message):</label>
             <input type="text" class="form-control" id="contact" placeholder="How to contact you?" name="contact" />
           </div>
-
+        </div>
+      </div>
+      <div class="row">
+        <div class="center">
           <button type="submit" class="btn submit-btn btn-success">Publish</button>
           <button type="button" class="btn submit-btn btn-danger cancel-new-ride-js" >Cancel</button>
         </div>

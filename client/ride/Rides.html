@@ -1,24 +1,45 @@
 <template name="Rides">
-    <div class="container">
-        {{#if $.Session.get 'newRide'}}
-            {{> NewRide}}
-        {{else}}
-            <button class="btn btn-primary submit-btn new-ride-js">Provide a New Ride Share</button>
-        {{/if}} 
+  <div class="container">
 
-        <section class="rides-list">
-            {{#if Template.subscriptionsReady}}
-                {{#each rides}}
-                    {{> Ride}}
-                {{else}}
-                    <p> No Active Rids Now ... </p>
-                {{/each}}
-            {{else}}
-                {{> spinner}}
-            {{/if}}
-        </section>
+    <section class="row new-ride-form">
+      {{#if $.Session.get 'newRide'}}
+      {{> NewRide}}
+      {{else}}
+      <div class="col-sm-8">
+        <div class="col-xs-6">
+           <div class="title alert alert-info" title="Share A Ride">Share A Ride<span class="chinese"> 拼车 </span></div>
+        </div>
+        <div class="col-xs-6">
+          <p class="service-info"> Start or join a ride share</p>
+          <p class="service-info chinese">发布或寻找拼车信息</p>
+        </div>
+     
+      </div>
+      <div class="col-sm-4">
+        <button class="btn btn-primary submit-btn new-ride-js right-button">Provide a New Ride Share</button>
+      </div> 
+      {{/if}}
+    </section>
 
-    </div>
+
+    <section class="row rides-list">
+      <div class="tabs-container">
+        <ul class="nav nav-tabs nav-justified tab-lists">
+          <li role="presentation" class="active"><a href="#">All</a></li>
+          <li role="presentation" class=""><a href="#">PU->ORD</a></li>
+          <li role="presentation" class=""><a href="#">ORD->PU</a></li>
+          <li role="presentation" class=""><a href="#">Other Routes</a></li>
+          <li role="presentation" class=""><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+          <li role="presentation" class=""><a href="#">My</a></li>
+        </ul>
+      </div>
+      <div class="container tab-content">
+        {{> RidesList category=listCategory}}
+      </div>
+
+    </section>
+
+  </div>
 </template>
 
 

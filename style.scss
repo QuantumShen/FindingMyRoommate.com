@@ -1,13 +1,19 @@
 $bootstrap-blue: #23527c;
+$break-small: 319px;
+$break-medium : 767px;
+$break-large: 1023px;
+
 
 .chinese{
     font-family: 'STHeiti', 'Microsoft YaHei';
 }
+
 .center{
     display: table;
     width: auto;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 
 .left{
@@ -15,25 +21,132 @@ $bootstrap-blue: #23527c;
     margin-right: auto;
 }
 
-
-.submit-btn{
-    margin: 5px;
-    min-width: 200px;
-    font-size: 18px;
+.add-margin-top{
+    margin-top: 10px;
 }
-
-.normal-btn{
-    margin: 5px;
-    min-width: 100px;
-    font-size: 15px;
-}
-
-.required:after{
-    content: "*";
-    color: red
+.add-margin-bottom{
+    margin-bottom: 10px;
 }
 
 
+
+section.new-ride-form{
+    margin-top: 10px;
+
+    .title{
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .service-info{
+        padding: 0;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        color: #31708F;
+        font-size: 16px;
+    }
+
+    .submit-btn{
+        margin: 5px;
+        min-width: 200px;
+        font-size: 18px;
+        @media screen and (max-width: $break-medium) {
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    }
+
+    .right-button{
+        float: right;
+        @media screen and (max-width: $break-medium) {
+            float: none;
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+
+    .normal-btn{
+        margin: 5px;
+        min-width: 100px;
+        font-size: 15px;
+    }
+
+    .required:after{
+        content: "*";
+        color: red;
+    }
+}
+
+
+section.rides-list{
+
+    .tabs-container {
+        padding: 0;
+        margin: 15px;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+
+    .nav-tabs > li > a {
+        text-align: center;
+    }
+
+    .with-border{
+        border: thin solid #ababab;
+    }
+
+    .with-box-shadow{
+        -webkit-box-shadow: 0 3px 6px #444444;
+        -moz-box-shadow: 0 3px 6px #444444;
+        box-shadow: 0 3px 6px #444444;
+    }
+
+    .box-margin{
+        margin-bottom: 25px;
+
+    }
+
+    .avatar.avatar-circle{
+        height: 50px;
+        width: 50px;
+        text-align: center;
+
+        @media screen and (max-width: $break-medium) {
+            height: 40px;
+            width: 40px;
+            .avatar-initials{
+                line-height: 40px;
+            }
+        }
+        @media screen and (max-width: $break-small) {
+            height: 30px;
+            width: 30px;
+            .avatar-initials{
+                line-height: 30px;
+            }
+        }
+    }
+
+    .user-col{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .user-name{
+        width: 100%;
+        font-size: 16px;
+        text-align: center;
+        color: #333;
+    }
+    .ride-col{
+        border-left: 1px solid #bbb
+    }
+
+}
 
 nav.navbar{
     background-color: #012178;
@@ -84,14 +197,6 @@ nav.navbar{
 
     }
 }
-
-
-.btn-group{
-    padding: 15px;
-}
-
-
-
 
 .home-body{
     position: absolute; //can not use body since the css are shared by all html, so simulate body

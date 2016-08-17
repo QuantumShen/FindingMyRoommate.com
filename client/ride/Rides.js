@@ -1,15 +1,9 @@
 Template.Rides.onCreated(function(){
-    var self = this;
-    self.autorun(function() {
-        self.subscribe('AllRides');
-    });
+   Session.set('listCategory', 'AllActiveRides');
 });
 
-Template.Rides.helpers({
-    rides: ()=> {
-        return Rides.find({});
-    }
-});
+
+
 
 Template.Rides.events({
     'click .new-ride-js': () => {
@@ -18,3 +12,8 @@ Template.Rides.events({
 });
 
 
+Template.Rides.helpers({
+    'listCategory': ()=>{
+        return Session.get('listCategory');
+    }
+});

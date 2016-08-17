@@ -1,0 +1,11 @@
+<template name="RidesList">
+    {{#if Template.subscriptionsReady}}
+        {{#each rides}}
+            {{> Ride}}
+        {{else}}
+            <p class="info-empty"> Sorry, no active rides now. </p>
+        {{/each}}
+    {{else}}
+        {{> spinner}}
+    {{/if}}
+</template>

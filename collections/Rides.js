@@ -70,12 +70,12 @@ RidesSchema = new SimpleSchema({
         optional: true
     },
 
-    effective:{
+    active:{
         type: Boolean,
-        label: "Effectiveness",
+        label: "activeness",
         autoValue: function(){
-            var effectiveTo = this.field('effectiveTo').value;
-            if(effectiveTo >= (new Date())){
+            var activeTo = this.field('activeTo').value;
+            if(activeTo >= (new Date())){
                 return true;
             }else{
                 return false;
@@ -88,12 +88,12 @@ RidesSchema = new SimpleSchema({
         label: "Round trip or not"
 	},
 
-    effectiveTo:{
+    activeTo:{
         type: Date,
-        label: "Last effective day"
+        label: "Last active day"
     },
 
-	creater: {
+	creator: {
 		type: String,
 		label: "Creater ID",
 		autoValue: function () {

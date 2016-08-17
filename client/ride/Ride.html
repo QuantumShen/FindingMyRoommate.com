@@ -1,4 +1,44 @@
 <template name="Ride">
-    {{_id}}
-    <br>
+
+
+    <div class="row with-border with-box-shadow box-margin">
+
+    {{#if Template.subscriptionsReady}}
+        <div class="col-xs-12" style="padding:3%">
+            <div class="user-col col-xs-3 col-md-1">
+                <div class="center">
+                    {{> avatar user=user shape="circle"}}
+                </div>
+                
+                <div class="user-name">{{user.username}}</div>
+                <!-- {{emails[0].address}} -->
+            </div>
+            <div class="ride-col col-xs-9 col-md-12">
+                <div class="row">
+                    <div class="col-xs-6">
+                        {{trip1.from}} -> {{trip1.to}}
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="row">
+                            {{date "trip1"}}
+                        </div>
+                        <div class="row">
+                            {{trip1.time}}
+                        </div>
+                    </div>
+                </div>
+                {{#if roundTrip}}
+                <div class="row">
+                    
+                </div>
+                {{/if}}
+
+            </div>
+
+        </div>
+
+    {{/if}}
+
+    </div>
+
 </template>
