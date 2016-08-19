@@ -1,17 +1,14 @@
 Template.NewRide.onCreated(function() {
   this.roundTrip = new ReactiveVar(false);  //this is the template instance
   this.ckResult = new ReactiveVar(true);
-
-  
-
-
 });
 
 
 Template.NewRide.onRendered(()=>{
     $('.datepicker').datepicker({
-    dateFormat: 'yy-mm-dd'
-  });
+        dateFormat: 'yy-mm-dd'
+    });
+    
 });
 
 function checkStringNotEmpty(str, result){
@@ -41,13 +38,14 @@ Template.NewRide.events({
     'submit .add-ride-js': function(event, instance){
         event.preventDefault();
 
+
         if(Meteor.user()){
             var t = event.target;
-
             var ckResult = instance.ckResult;
             var doc = {
                 roundTrip: instance.roundTrip.get(),
                 trip1:{
+                    category: parseInt(checkStringNotEmpty(t.radio1.value, ckResult)),
                     from: checkStringNotEmpty(t.from1.value, ckResult),
                     to: checkStringNotEmpty(t.to1.value, ckResult),
                     date: new Date(checkStringNotEmpty(t.date1.value+"T00:00:00-04:00", ckResult)),
@@ -58,6 +56,7 @@ Template.NewRide.events({
             };
             if(doc.roundTrip){
                 doc.trip2 = {
+                    category: parseInt(checkStringNotEmpty(t.radio2.value, ckResult)),
                     from: checkStringNotEmpty(t.from2.value, ckResult),
                     to: checkStringNotEmpty(t.to2.value, ckResult),
                     date: new Date(checkStringNotEmpty(t.date2.value+"T00:00:00-04:00", ckResult)),
@@ -77,17 +76,16 @@ Template.NewRide.events({
                 activeTo = doc.trip2.date;
             }
 
-           
+
             doc.activeTo = new Date(activeTo);
             doc.activeTo.setDate(doc.activeTo.getDate()+1); //active to the end of the day
-    
             Meteor.call('insertRide', doc, function(error, result){
                 if(error){
-                    Bert.alert( 'Sorry for Internal Error. Please tell me: support@findingmyroommate.com', 'danger', 'fixed-top', 'fa-frown-o' );
+                    Bert.alert( 'Input Error! Try to limit the required fields to less than 40 characters.', 'danger', 'fixed-top', 'fa-frown-o' );
                     return false;
                 }
                 if(!result){
-                    Bert.alert( 'Input too long! Try to limit the required input to less than 40 characters.', 'danger', 'fixed-top', 'fa-frown-o' );
+                    Bert.alert( 'Not Logged In! ', 'danger', 'fixed-top', 'fa-frown-o' );
                     return false;
                 }
             });

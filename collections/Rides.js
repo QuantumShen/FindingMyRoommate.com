@@ -24,6 +24,11 @@ Rides.deny({
 
 
 Trip = new SimpleSchema({
+    category: {
+        type: Number,
+        label: "Category",
+    },
+
 	from: {
 		type: String,
 		label: "From" ,
