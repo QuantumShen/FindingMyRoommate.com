@@ -1,6 +1,17 @@
 Template.NewRide.onCreated(function() {
   this.roundTrip = new ReactiveVar(false);  //this is the template instance
   this.ckResult = new ReactiveVar(true);
+
+  
+
+
+});
+
+
+Template.NewRide.onRendered(()=>{
+    $('.datepicker').datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
 });
 
 function checkStringNotEmpty(str, result){
@@ -42,7 +53,7 @@ Template.NewRide.events({
                     date: new Date(checkStringNotEmpty(t.date1.value+"T00:00:00-04:00", ckResult)),
                     //should add time and zone, otherwise it will be UTC00:00
                     time: checkStringNotEmpty(t.time1.value, ckResult),
-                    comment: event.target.comment1.value
+                    description: event.target.description1.value
                 }
             };
             if(doc.roundTrip){
@@ -51,7 +62,7 @@ Template.NewRide.events({
                     to: checkStringNotEmpty(t.to2.value, ckResult),
                     date: new Date(checkStringNotEmpty(t.date2.value+"T00:00:00-04:00", ckResult)),
                     time: checkStringNotEmpty(t.time2.value, ckResult),
-                    comment: event.target.comment2.value
+                    description: event.target.description2.value
                 };
             }
 
@@ -71,8 +82,12 @@ Template.NewRide.events({
             doc.activeTo.setDate(doc.activeTo.getDate()+1); //active to the end of the day
     
             Meteor.call('insertRide', doc, function(error, result){
-                if(error || !result){
+                if(error){
                     Bert.alert( 'Sorry for Internal Error. Please tell me: support@findingmyroommate.com', 'danger', 'fixed-top', 'fa-frown-o' );
+                    return false;
+                }
+                if(!result){
+                    Bert.alert( 'Input too long! Try to limit the required input to less than 40 characters.', 'danger', 'fixed-top', 'fa-frown-o' );
                     return false;
                 }
             });

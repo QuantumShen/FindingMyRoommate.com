@@ -8,7 +8,7 @@ Template.Ride.onCreated(function(){
 
 Template.Ride.helpers({
     user: function(){
-        console.log(this);
+        // console.log(this);
         return Users.findOne({_id: this.creator});
     },
     date: function(trip){

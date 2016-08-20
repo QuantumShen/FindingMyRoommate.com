@@ -12,3 +12,12 @@ Accounts.onLogin(function(){
     $('#loginModal').modal('hide');
 });
 
+
+Template.LoginModal.events({
+    'click .close': function(){
+        setTimeout(()=>{
+            AccountsTemplates.setState("signIn");
+        }, 500);
+    }
+});
+

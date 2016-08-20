@@ -1,24 +1,38 @@
 Rides = new Mongo.Collection('rides');
 
+// Rides.allow({
+// 	insert: function(userId, doc) {
+// 		return !!userId;
+// 	},
+// 	update: function(userId, doc) {
+// 		return !!userId;
+// 	}
+// });
+//disable any client side operation
 Rides.allow({
-	insert: function(userId, doc) {
-		return !!userId;
-	},
-	update: function(userId, doc) {
-		return !!userId;
-	}
+  insert: () => false,
+  update: () => false,
+  remove: () => false
 });
+
+Rides.deny({
+  insert: () => true,
+  update: () => true,
+  remove: () => true
+});
+
+
 
 Trip = new SimpleSchema({
 	from: {
 		type: String,
 		label: "From" ,
-        max: 100
+        max: 40
 	},
 	to: {
 		type: String,
 		label: "To",
-        max: 100
+        max: 40
 	},
 	date: {
 		type: Date,
@@ -27,11 +41,11 @@ Trip = new SimpleSchema({
     time:{
         type: String,
         label: "To",
-        max: 100
+        max: 40
     },
-    comment:{
+    description:{
         type: String,
-        label: "Comment",
+        label: "description",
         optional: true,
         max: 300
     }
@@ -97,9 +111,14 @@ RidesSchema = new SimpleSchema({
 		type: String,
 		label: "Creater ID",
 		autoValue: function () {
-            //console.log(this);
-			return Meteor.userId();
-            //return this.userId;
+            if(this.isInsert){
+                return Meteor.userId();
+                //this.userId is null on server side
+            }else{
+                this.unset(); //for the update in publish
+            }
+			
+            
 		}
 	},
 	createdAt: {

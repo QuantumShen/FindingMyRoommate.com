@@ -16,7 +16,7 @@ Meteor.methods({
             var rideContext = RidesSchema.namedContext("rideForm");
 
             if(rideContext.validate(doc)){
-                Rides.insert(doc);
+                Rides.insert(doc);//don't need validate in fact, insert will do validate and throws error which displays on server and catch by client
                 return true;
             }
         }

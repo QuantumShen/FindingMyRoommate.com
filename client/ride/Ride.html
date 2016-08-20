@@ -1,44 +1,105 @@
 <template name="Ride">
 
 
-    <div class="row with-border with-box-shadow box-margin">
+  <div class="row with-border with-box-shadow box-margin">
 
     {{#if Template.subscriptionsReady}}
-        <div class="col-xs-12" style="padding:3%">
-            <div class="user-col col-xs-3 col-md-1">
-                <div class="center">
-                    {{> avatar user=user shape="circle"}}
-                </div>
-                
-                <div class="user-name">{{user.username}}</div>
-                <!-- {{emails[0].address}} -->
-            </div>
-            <div class="ride-col col-xs-9 col-md-12">
-                <div class="row">
-                    <div class="col-xs-6">
-                        {{trip1.from}} -> {{trip1.to}}
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="row">
-                            {{date "trip1"}}
-                        </div>
-                        <div class="row">
-                            {{trip1.time}}
-                        </div>
-                    </div>
-                </div>
-                {{#if roundTrip}}
-                <div class="row">
-                    
-                </div>
-                {{/if}}
-
-            </div>
-
+    <div class="col-xs-12" style="padding:3%">
+      <div class="user-col col-xs-3 col-sm-1">
+        <div class="center">
+          {{> avatar user=user shape="circle"}}
         </div>
+
+        <div class="user-name">{{user.username}}</div>
+        <!-- {{emails[0].address}} -->
+      </div>
+      <div class="col-xs-9 col-sm-11">
+        <div class="ride-col">
+          <!-- trip1   -->
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="center">
+                <div class="location">
+                  {{trip1.from}}
+                </div>
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                <div class="location">
+                  {{trip1.to}}
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="row">
+                <div class="date">
+                  {{date "trip1"}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="time">
+                  {{trip1.time}}
+                </div>
+
+              </div>
+            </div>
+          </div>
+          {{#if trip1.description}}
+          <div class="row">
+            <div class="description well">
+              {{trip1.description}}
+            </div>
+          </div>
+          {{/if}}
+          <!-- end trip1 -->
+
+          <!-- trip2 -->
+          {{#if roundTrip}}
+          <div class="row">
+            <hr>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="center">
+                <div class="location">
+                  {{trip2.from}}
+                </div>
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                <div class="location">
+                  {{trip2.to}}
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="row">
+                <div class="date">
+                  {{date "trip2"}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="time">
+                  {{trip2.time}}
+                </div>
+
+              </div>
+            </div>
+          </div>
+	          {{#if trip2.description}}
+	          <div class="row">
+	            <div class="description well">
+	              {{trip2.description}}
+	            </div>
+	          </div>
+          	{{/if}} 
+          {{/if}}
+
+					<!-- end trip2 -->
+
+        </div> <!-- end ride-col -->
+      </div>
+
+    </div>
 
     {{/if}}
 
-    </div>
+  </div>
 
 </template>
