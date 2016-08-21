@@ -134,6 +134,12 @@ RidesSchema = new SimpleSchema({
 		},
 	},
 
+    contact:{
+        type: String,
+        label: "Contact Method",
+        optional: true
+    },
+
     //Two experiments
 	likes: {
 		type: Number,

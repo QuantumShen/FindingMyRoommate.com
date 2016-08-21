@@ -4,11 +4,23 @@ Template.NewRide.onCreated(function() {
 });
 
 
-Template.NewRide.onRendered(()=>{
-    $('.datepicker').datepicker({
-        dateFormat: 'yy-mm-dd'
+Template.NewRide.onRendered(function(){
+
+    this.autorun(()=>{
+        $('#date1').datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+
+        if(this.roundTrip.get()){
+            Tracker.afterFlush(()=>{
+                $('#date2').datepicker({
+                    dateFormat: 'yy-mm-dd'
+                });
+            });
+            
+        } 
     });
-    
+
 });
 
 function checkStringNotEmpty(str, result){
@@ -52,7 +64,8 @@ Template.NewRide.events({
                     //should add time and zone, otherwise it will be UTC00:00
                     time: checkStringNotEmpty(t.time1.value, ckResult),
                     description: event.target.description1.value
-                }
+                },
+                contact: event.target.contact.value
             };
             if(doc.roundTrip){
                 doc.trip2 = {
