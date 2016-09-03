@@ -2,7 +2,7 @@ Template.ServiceEntrance.helpers({
     services:[
         {
             path:"/rides",
-            imgPath:"/images/share-a-ride.png",
+            imgPath:"/images/shareride.png",
             title: "Share A Ride",
             chineseTitle: "拼车",
             description:"Start or join a ride share",
@@ -12,7 +12,7 @@ Template.ServiceEntrance.helpers({
         },
         {
             path:"/roommates",
-            imgPath:"/images/share-a-ride.png",
+            imgPath:"/images/roommates.png",
             title: "Find Roommates",
             chineseTitle: "找室友",
             description:"Start or join a roommates group",
@@ -21,7 +21,7 @@ Template.ServiceEntrance.helpers({
             activeNumber: 10, //todo
         },{
             path:"/subleases",
-            imgPath:"/images/share-a-ride.png",
+            imgPath:"/images/sublease.png",
             title: "Sublease Information",
             chineseTitle: "转租",
             description:"Provide or ask for sublease",

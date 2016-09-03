@@ -1,15 +1,16 @@
 <template name="Ride">
 
 
-  <div class="row ride-box">
+  <div class="row ride-box" style="border-top-color: {{topColor}}">
 
     {{#if Template.subscriptionsReady}}
 
-
+      <div class="col-xs-12 ride-inner-box">
       {{#if editMode}}
         {{> quickForm collection="Rides" id=updateRideId type="update" doc=this autosave=true}}
       {{else}}
-      <div class="col-xs-12 ride-inner-box">
+
+        <!-- display form -->
         <div class="user-col col-xs-3 col-sm-1">
           <div class="center">
             {{> avatar user=user shape="circle"}}
@@ -105,17 +106,25 @@
         {{#if contact}}
         <div class="col-xs-12 no-padding">
           <hr>
-          <span> Contact Method: {{contact}} </span> 
+          <div class="alert alert-warning">
+            Contact Method 
+          </div>
+          <span> {{contact}} </span> 
         </div>
-        {{/if}}
+        {{/if}}  <!-- end if contact -->
+      {{/if}} <!-- end if editMode -->
       </div>
-      <i class="fa fa-trash"></i>
-      <i class="fa fa-pencil"></i>
-      {{/if}}
+      <i class="fa fa-trash"  title="Delete"></i>
+      <i class="fa fa-pencil" title="Edit / Cancel Edit" ></i>
+      {{#if provide}}
+        <span class="ride-direction provide-ride"> Providing a Ride </span>
+      {{else}}
+        <span class="ride-direction require-ride"> Looking For a Ride </span>
+      {{/if}} <!-- end if provide -->
 
-    {{/if}}
+    {{/if}} <!-- end if Template.subscriptionsReady -->
 
-  
+    
 
 
   </div>

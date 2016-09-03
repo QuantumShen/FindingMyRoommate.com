@@ -4,8 +4,14 @@ Template.Rides.onCreated(function(){
 
 
 Template.Rides.events({
-    'click .new-ride-js': () => {
+    'click .provide-new-ride-js': () => {
         Session.set('newRide', true);
+        Session.set('provideRide', true);
+    },
+
+    'click .looking-for-new-ride-js': () => {
+        Session.set('newRide', true);
+        Session.set('provideRide', false);
     },
 
     'click .tab-lists>li>a': function(event, instance){

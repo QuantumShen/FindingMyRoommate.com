@@ -1,6 +1,9 @@
-$myfav-darkblue: #23527c;
-$myfav-darkgrey: #C1C1C1;
-$myfav-lightgrey: #DADADA;
+$mycolor-darkblue: #23527c;
+$mycolor-darkgrey: #C1C1C1;
+$mycolor-lightgrey: #DADADA;
+
+$mycolor-darkgreen: #3c763d;
+$mycolor-darkred: #A94442; //
 
 $break-small: 319px;
 $break-medium : 767px;
@@ -121,27 +124,26 @@ section.rides-list{
 		text-align: center;
 	}
 
-	.with-border{
-		
-	}
-
 	.ride-box{
 		
-		-webkit-box-shadow: 0 3px 6px #444444;
-		-moz-box-shadow: 0 3px 6px #444444;
-		box-shadow: 0 3px 6px #444444;
-
-		margin-bottom: 25px;
-		border: thin solid #ababab;
+		&:hover{
+			-webkit-box-shadow: 0 3px 6px #444444;
+			-moz-box-shadow: 0 3px 6px #444444;
+			box-shadow: 0 3px 6px #444444;
+			@include trans(0.2s);
+		}
+		
+		margin: 0 0 25px 0;
+		border: thin solid $mycolor-darkgrey;
+		border-top: 5px solid $mycolor-darkgrey;
 
 		position: relative;
 
-		.fa-trash, .fa-pencil{
+		.ride-direction, .fa-trash, .fa-pencil{
 			opacity:0.3;
 			cursor:pointer;
 			position:absolute;
 			top:0;
-			right:0;
 			font-size:1.6em;
 			display:block;
 			color:black;
@@ -151,17 +153,37 @@ section.rides-list{
 		.fa-pencil{
 			right: 60px;
 			&:hover{
-				color:green;
-				opacity:0.6;
+				color:$mycolor-darkgreen;
+				opacity:0.8;
 			}
 		}
 		.fa-trash{
 			right: 30px;
 			&:hover{
-				color:red;
-				opacity:0.6;
+				color:$mycolor-darkred;
+				opacity:0.8;
 			}
 		}
+
+		.ride-direction{
+			left: 20px;
+			color: $mycolor-darkred;
+			font-size: 1em;
+			line-height: 1em;
+			cursor: default;
+			text-shadow: 1px 1px $mycolor-lightgrey;
+			&.require-ride{
+				color: $mycolor-darkred;
+				opacity: 1;
+			}
+
+			&.provide-ride{
+				color: $mycolor-darkgreen;
+				opacity: 1;
+
+			}
+		}
+
 
 		.ride-inner-box{
 			padding: 40px 3% 20px 3%;
@@ -199,12 +221,12 @@ section.rides-list{
 			color: #333;
 		}
 		.ride-col{
-			border-left: 2px solid $myfav-darkgrey;
+			border-left: 2px solid $mycolor-darkgrey;
 			.location{
 				display: inline-block;
 				padding: 5px;
 				border-radius: 4px;
-				border: 1px solid $myfav-darkblue;
+				border: 1px solid $mycolor-darkblue;
 				margin-top: 5px;
 				margin-bottom: 5px;
 				font-weight: bold;
@@ -221,7 +243,7 @@ section.rides-list{
 			}
 
 			.time{
-				border-top: 2px dashed $myfav-lightgrey;
+				border-top: 2px dashed $mycolor-lightgrey;
 			}
 
 			.description{
@@ -233,7 +255,14 @@ section.rides-list{
 			}
 		}
 		hr{
-			border-top: 2px solid $myfav-darkgrey;
+			border-top: 2px solid $mycolor-darkgrey;
+		}
+		.alert{
+			width: auto;
+			padding: 10px;
+			display: inline-block;
+			margin-bottom: 0;
+			margin-right: 10px;
 		}
 	}
 }
@@ -262,7 +291,7 @@ nav.navbar{
 			color: white;
 			&:hover{
 				border-color: #000;
-				color: $myfav-darkblue;
+				color: $mycolor-darkblue;
 			}
 		}
 	}
@@ -279,7 +308,7 @@ nav.navbar{
 
 			&:hover{
 				border-color: #000;
-				color: $myfav-darkblue;
+				color: $mycolor-darkblue;
 			}
 
 
@@ -354,7 +383,7 @@ nav.navbar{
 					height: 100%;
 					border: 1px solid #ccc;
 					min-width: 250px;
-					min-height: 181px;
+					min-height: 180px;
 				}
 				h4 {
 					font-size: 20px;
@@ -369,7 +398,7 @@ nav.navbar{
 					margin: 0;
 					padding: 0;
 					font-size: 16px;
-					color: $myfav-darkblue;
+					color: $mycolor-darkblue;
 					margin: 8px 0;
 					text-align: center;
 					white-space: nowrap;

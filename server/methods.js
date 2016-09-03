@@ -7,7 +7,15 @@ Meteor.methods({
         });
     },
     deleteRide: function(id){
-        Rides.remove(id);
+        check(id, String);
+        doc = Rides.findOne({_id: id});
+        //console.log(this);
+        if(doc && doc.creator === this.userId){
+            Rides.remove(id);
+            return 0;
+        }else{
+            return -1;
+        }
     },
     insertRide: function(doc){
         if(Meteor.userId()){
