@@ -3,7 +3,8 @@ $mycolor-darkgrey: #C1C1C1;
 $mycolor-lightgrey: #DADADA;
 
 $mycolor-darkgreen: #3c763d;
-$mycolor-darkred: #A94442; //
+$mycolor-darkred: #A94442; 
+$mycolor-darkorange: #8A6D3B;
 
 $break-small: 319px;
 $break-medium : 767px;
@@ -25,9 +26,15 @@ $break-large: 1023px;
 	text-align: center;
 }
 
+
+
 .left{
 	margin-left: 15px;
 	margin-right: auto;
+}
+
+.right{
+	float: right;
 }
 
 .add-margin-top{
@@ -44,11 +51,25 @@ $break-large: 1023px;
 
 section.new-ride-form{
 	margin-top: 10px;
+	.fa-close{
+		position:absolute; 
+		right:0; 
+		margin: 10px 20px 10px 10px; 
+		padding: 5px; 
+		border-radius: 4px; 
+		border: solid 1px $mycolor-darkgrey;
+		&:hover{
+			cursor: pointer;
+			border-color: #000;
+		}
+	}
+	
 
 	.title{
 		font-size: 20px;
 		font-weight: bold;
 		text-align: center;
+		margin: 0;
 	}
 
 	.radios{
@@ -166,14 +187,14 @@ section.rides-list{
 		}
 
 		.ride-direction{
-			left: 20px;
-			color: $mycolor-darkred;
-			font-size: 1em;
+			top: -35px;
+			left: 5px;
+			font-size: 1.2em;
 			line-height: 1em;
 			cursor: default;
 			text-shadow: 1px 1px $mycolor-lightgrey;
 			&.require-ride{
-				color: $mycolor-darkred;
+				color: $mycolor-darkorange;
 				opacity: 1;
 			}
 
@@ -221,12 +242,13 @@ section.rides-list{
 			color: #333;
 		}
 		.ride-col{
+			position: relative;
 			border-left: 2px solid $mycolor-darkgrey;
 			.location{
 				display: inline-block;
 				padding: 5px;
 				border-radius: 4px;
-				border: 1px solid $mycolor-darkblue;
+				border: 2px solid $mycolor-darkblue;
 				margin-top: 5px;
 				margin-bottom: 5px;
 				font-weight: bold;

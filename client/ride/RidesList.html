@@ -3,7 +3,7 @@
         {{#each rides}}
             {{> Ride}}
         {{else}}
-            <p class="info-empty"> Sorry, no active rides now. </p>
+            <div class="alert alert-danger"> <li class="fa fa-frown-o"> Sorry, no active rides in this category now.</li> </div>
         {{/each}}
     {{else}}
         {{> spinner}}

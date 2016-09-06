@@ -1,13 +1,15 @@
 <template name="NewRide">
-  <div class="container">
-    <button class="btn normal-btn {{btnSingleTrip}} fa fa-taxi"> Single Trip <span class="chinese">单程</span></button>
+  <div class="container" style="position: relative; {{#if isInRideBox}} width:100% {{/if}}">
+    <div style="width: 80%">
+    <button class="btn normal-btn {{btnSingleTrip}} fa fa-share"> Single Trip <span class="chinese">单程</span></button>
     <button class="btn normal-btn {{btnRoundTrip}} fa fa-refresh"> Round Trip <span class="chinese">往返</span></button>
-
+    <i class="btn-danger cancel-new-ride-js fa fa-close"> </i>
+    </div>
     <form class="add-ride-js">
 
       <div class="row add-margin-top">
         <div class="{{col}}">
-          <div class="panel panel-primary">
+          <div class="panel {{panelColor}}">
             <div class="panel-heading">To Trip <span class="chinese">去程</span></div>
             <div class="panel-body">
 
@@ -61,7 +63,7 @@
 
         {{#if roundTrip}}
         <div class="{{col}}">
-          <div class="panel panel-primary">
+          <div class="panel {{panelColor}}">
             <div class="panel-heading">Back Trip <span class="chinese">返程</span></div>
             <div class="panel-body">
 
@@ -128,7 +130,7 @@
       </div>
       <div class="row">
         <div class="center">
-          <button type="submit" class="btn submit-btn btn-success">Publish</button>
+          <button type="submit" class="btn submit-btn {{btnColor}}">Publish this {{pubText}}</button>
           <button type="button" class="btn submit-btn btn-danger cancel-new-ride-js">Cancel</button>
         </div>
       </div>

@@ -7,7 +7,8 @@
 
       <div class="col-xs-12 ride-inner-box">
       {{#if editMode}}
-        {{> quickForm collection="Rides" id=updateRideId type="update" doc=this autosave=true}}
+        <!-- {{> quickForm collection="Rides" id=updateRideId type="update" doc=this autosave=true}} -->
+        {{> NewRide}} 
       {{else}}
 
         <!-- display form -->
@@ -23,6 +24,13 @@
         </div>
         <div class="col-xs-9 col-sm-11">
           <div class="ride-col">
+
+            {{#if offerRide}}
+            <span class="ride-direction provide-ride"> <li class="fa fa-car"></li> Offer: </span>
+            {{else}}
+            <span class="ride-direction require-ride"> <li class="fa fa-street-view"></li> Need: </span>
+            {{/if}} <!-- end if offerRide -->
+
             <!-- trip1   -->
             <div class="row">
               <div class="col-xs-12 col-sm-6">
@@ -106,7 +114,7 @@
         {{#if contact}}
         <div class="col-xs-12 no-padding">
           <hr>
-          <div class="alert alert-warning">
+          <div class="alert {{#if offerRide}} alert-success {{else}} alert-warning {{/if}}">
             Contact Method 
           </div>
           <span> {{contact}} </span> 
@@ -114,13 +122,11 @@
         {{/if}}  <!-- end if contact -->
       {{/if}} <!-- end if editMode -->
       </div>
+
+      {{#if inMyRides}}
       <i class="fa fa-trash"  title="Delete"></i>
       <i class="fa fa-pencil" title="Edit / Cancel Edit" ></i>
-      {{#if provide}}
-        <span class="ride-direction provide-ride"> Providing a Ride </span>
-      {{else}}
-        <span class="ride-direction require-ride"> Looking For a Ride </span>
-      {{/if}} <!-- end if provide -->
+      {{/if}}
 
     {{/if}} <!-- end if Template.subscriptionsReady -->
 

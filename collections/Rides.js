@@ -107,6 +107,11 @@ RidesSchema = new SimpleSchema({
         label: "Round trip or not"
 	},
 
+    offerRide:{
+        type: Boolean,
+        label: "Offer a ride or need a ride"
+    },
+
     activeTo:{
         type: Date,
         label: "Last active day"

@@ -1,7 +1,7 @@
 Template.Ride.onCreated(function(){
     var self = this;
     this.editMode = new ReactiveVar(false);
-    this.confirmDelete = new ReactiveVar(false);
+    this.confirmDelete = new ReactiveVar(false);//I added this for what? don't remember
 
     self.autorun(function() {
         self.subscribe('UserInfo', Template.currentData().creator);
@@ -24,11 +24,14 @@ Template.Ride.helpers({
         return this._id;
     },
     topColor: function() {
-        if(this.provide){
+        if(this.offerRide){
             return "#3c763d";  //$mycolor-darkgreen
         }else{
-            return  "#A94442"; //$mycolor-darkred  
+            return  "#F0AD4E"; //$mycolor-darkredorange 
         }
+    },
+    inMyRides: function(){
+        return Session.get('listCategory') === "MyRides";
     }
 });
 
@@ -39,7 +42,7 @@ Template.Ride.events({
     },
     'click .fa-trash': function (events, instance) {
 
-        instance.confirmDelete.set(false);
+        //instance.confirmDelete.set(false); 
         
 
 

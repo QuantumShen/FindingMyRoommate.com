@@ -1,10 +1,19 @@
 Template.NewRide.onCreated(function() {
-  this.roundTrip = new ReactiveVar(false);  //this is the template instance
+  this.roundTrip = new ReactiveVar(false);  //THIS is the template instance
   this.ckResult = new ReactiveVar(true);
+  this.provideRide = new ReactiveVar(true);
+  this.updateRide = new ReactiveVar(false);
 });
 
 
 Template.NewRide.onRendered(function(){
+    // THIS is current template instance, this.data is just Template.currentData()
+    var data = Template.currentData();
+    if(data._id){    //undefined if no ride object
+        this.updateRide.set(true);
+        this.provideRide.set(data.offerRide);
+        this.roundTrip.set(data.roundTrip);
+    }    
 
     this.autorun(()=>{
         $('#date1').datepicker({
@@ -19,7 +28,14 @@ Template.NewRide.onRendered(function(){
             });
             
         } 
+
+        if(!data._id){
+            this.updateRide.set(false);
+            this.provideRide.set(Session.get('provideRide'));
+        }
     });
+
+
 
 });
 
@@ -40,7 +56,7 @@ function checkStringNotEmpty(str, result){
 }
 
 Template.NewRide.events({
-    'click .fa-taxi': function(events,instance) {
+    'click .fa-share': function(events,instance) {
         instance.roundTrip.set(false);
     },
     'click .fa-refresh': function(events,instance) {
@@ -56,6 +72,7 @@ Template.NewRide.events({
             var ckResult = instance.ckResult;
             var doc = {
                 roundTrip: instance.roundTrip.get(),
+                offerRide: instance.provideRide,
                 trip1:{
                     category: parseInt(checkStringNotEmpty(t.radio1.value, ckResult)),
                     from: checkStringNotEmpty(t.from1.value, ckResult),
@@ -65,7 +82,7 @@ Template.NewRide.events({
                     time: checkStringNotEmpty(t.time1.value, ckResult),
                     description: event.target.description1.value
                 },
-                contact: event.target.contact.value
+                contact: event.target.contact.value,
             };
             if(doc.roundTrip){
                 doc.trip2 = {
@@ -125,9 +142,24 @@ Template.NewRide.helpers({
         return Template.instance().roundTrip.get()? 'col-md-6' : 'col-md-12';
     },
     'btnRoundTrip'(){
-        return Template.instance().roundTrip.get()? 'btn-primary' : 'btn-default';
+        var color = Template.instance().provideRide.get()? 'btn-success' : 'btn-warning';
+        return Template.instance().roundTrip.get()? color : 'btn-default';
     },
     'btnSingleTrip'(){
-        return Template.instance().roundTrip.get()? 'btn-default' : 'btn-primary';
+        var color = Template.instance().provideRide.get()? 'btn-success' : 'btn-warning';
+        return Template.instance().roundTrip.get()? 'btn-default' : color;
     },
+    'panelColor'(){
+        return Template.instance().provideRide.get()? 'panel-success' : 'panel-warning';
+    },
+    'btnColor'(){
+        return Template.instance().provideRide.get()? 'btn-success' : 'btn-warning';
+    },
+    'pubText'(){
+        return Template.instance().provideRide.get()? 'Offer' : 'Need';
+    },
+    'isInRideBox'(){
+        return Template.instance().updateRide.get();
+    }
+
 });
