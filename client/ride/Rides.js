@@ -33,7 +33,6 @@ Template.Rides.events({
         Session.set('listCategory', dom.id);
 
         //subscribe correponsing publish in RidesList based on 'listCategory'
-
     },
 
 

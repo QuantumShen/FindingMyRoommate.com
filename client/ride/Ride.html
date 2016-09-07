@@ -1,136 +1,151 @@
 <template name="Ride">
 
 
-  <div class="row ride-box" style="border-top-color: {{topColor}}">
+  <div class="row ride-box {{#unless active}} grey-bg {{/unless}}" style="border-top-color: {{topColor}}">
 
     {{#if Template.subscriptionsReady}}
 
-      <div class="col-xs-12 ride-inner-box">
+    <div class="col-xs-12 ride-inner-box">
       {{#if editMode}}
-        <!-- {{> quickForm collection="Rides" id=updateRideId type="update" doc=this autosave=true}} -->
-        {{> NewRide}} 
+      <!-- {{> quickForm collection="Rides" id=updateRideId type="update" doc=this autosave=true}} -->
+      <div class="new-ride-form">{{> NewRide}} </div>
+
       {{else}}
 
-        <!-- display form -->
-        <div class="user-col col-xs-3 col-sm-1">
-          <div class="center">
-            {{> avatar user=user shape="circle"}}
-          </div>
-
-          <div class="user-name">{{user.username}}</div>
-
-
-          <!-- {{emails[0].address}} -->
+      <!-- display form -->
+      <div class="user-col col-xs-3 col-sm-1">
+        <div class="center">
+          {{> avatar user=user shape="circle"}}
         </div>
-        <div class="col-xs-9 col-sm-11">
-          <div class="ride-col">
 
-            {{#if offerRide}}
-            <span class="ride-direction provide-ride"> <li class="fa fa-car"></li> Offer: </span>
-            {{else}}
-            <span class="ride-direction require-ride"> <li class="fa fa-street-view"></li> Need: </span>
-            {{/if}} <!-- end if offerRide -->
+        <div class="user-name">{{user.username}}</div>
 
-            <!-- trip1   -->
-            <div class="row">
-              <div class="col-xs-12 col-sm-6">
-                <div class="center">
-                  <div class="location">
-                    {{trip1.from}}
-                  </div>
-                  <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                  <div class="location">
-                    {{trip1.to}}
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6">
-                <div class="row">
-                  <div class="date">
-                    <b>Date:</b> {{date "trip1"}}
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="time">
-                    <b>Time:</b> {{trip1.time}}
-                  </div>
 
-                </div>
-              </div>
-            </div>
-            {{#if trip1.description}}
-            <div class="row">
-              <div class="description well">
-                {{trip1.description}}
-              </div>
-            </div>
-            {{/if}}
-            <!-- end trip1 -->
-
-            <!-- trip2 -->
-            {{#if roundTrip}}
-            <div class="row">
-              <hr>
-            </div>
-            <div class="row">
-              <div class="col-xs-12 col-sm-6">
-                <div class="center">
-                  <div class="location">
-                    {{trip2.from}}
-                  </div>
-                  <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                  <div class="location">
-                    {{trip2.to}}
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6">
-                <div class="row">
-                  <div class="date">
-                    <b>Date:</b> {{date "trip2"}}
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="time">
-                    <b>Time:</b> {{trip2.time}}
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            {{#if trip2.description}}
-            <div class="row">
-              <div class="description well">
-                {{trip2.description}}
-              </div>
-            </div>
-            {{/if}} {{/if}}
-
-            <!-- end trip2 -->
-
-          </div>
-          <!-- end ride-col -->
-        </div>
-        {{#if contact}}
-        <div class="col-xs-12 no-padding">
-          <hr>
-          <div class="alert {{#if offerRide}} alert-success {{else}} alert-warning {{/if}}">
-            Contact Method 
-          </div>
-          <span> {{contact}} </span> 
-        </div>
-        {{/if}}  <!-- end if contact -->
-      {{/if}} <!-- end if editMode -->
+        <!-- {{emails[0].address}} -->
       </div>
+      <div class="col-xs-9 col-sm-11">
+        <div class="ride-col">
 
-      {{#if inMyRides}}
-      <i class="fa fa-trash"  title="Delete"></i>
-      <i class="fa fa-pencil" title="Edit / Cancel Edit" ></i>
+          <!-- trip1   -->
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="center">
+                <div class="location">
+                  {{trip1.from}}
+                </div>
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                <div class="location">
+                  {{trip1.to}}
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="row">
+                <div class="date">
+                  <i class="fa fa-calendar"></i><b> Date:</b> {{date "trip1"}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="time">
+                   <i class="fa fa-clock-o"></i><b> Time:</b> {{trip1.time}}
+                </div>
+
+              </div>
+            </div>
+          </div>
+          {{#if trip1.description}}
+          <div class="row">
+            <div class="description well">
+              {{trip1.description}}
+            </div>
+          </div>
+          {{/if}}
+          <!-- end trip1 -->
+
+          <!-- trip2 -->
+          {{#if roundTrip}}
+          <div class="row">
+            <hr>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6">
+              <div class="center">
+                <div class="location">
+                  {{trip2.from}}
+                </div>
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                <div class="location">
+                  {{trip2.to}}
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <div class="row">
+                <div class="date">
+                  <i class="fa fa-calendar"></i><b> Date:</b> {{date "trip2"}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="time">
+                  <i class="fa fa-clock-o"></i><b> Time:</b> {{trip2.time}} 
+                </div>
+
+              </div>
+            </div>
+          </div>
+          {{#if trip2.description}}
+          <div class="row">
+            <div class="description well">
+              {{trip2.description}}
+            </div>
+          </div>
+          {{/if}} {{/if}}
+
+          <!-- end trip2 -->
+
+        </div>
+        <!-- end ride-col -->
+      </div>
+      {{#if contact}}
+      <div class="col-xs-12 no-padding">
+        <hr>
+        <div class="alert {{#if offerRide}} alert-success {{else}} alert-warning {{/if}}">
+          Contact Method
+        </div>
+        <span> {{contact}} </span>
+      </div>
+      {{/if}}
+      <!-- end if contact -->
+      
+      <div class="created-at"><span> Last Edit: {{createdAt}} </span></div>
+
+
+      {{/if}}
+      <!-- end else of if editMode -->
+    </div>
+
+    {{#if offerRide}}
+    <span class="ride-direction provide-ride"> <li class="fa fa-car"></li> Offer: </span> {{else}}
+    <span class="ride-direction require-ride"> <li class="fa fa-street-view"></li> Need: </span> {{/if}}
+    <!-- end if offerRide -->
+
+    {{#if inMyRides}}
+
+      {{#if active}}
+      <i class="fa fa-toggle-on toggle-activate-js" title="Click to Deactivate it"></i>
+      {{else}}
+      <i class="fa fa-toggle-off toggle-activate-js" title="Click to Activate it"></i>
       {{/if}}
 
-    {{/if}} <!-- end if Template.subscriptionsReady -->
+      <i class="fa fa-trash" title="Delete"></i>
+      <i class="fa fa-pencil" title="Edit / Cancel Edit"></i> 
+    {{/if}} 
+    <!-- end if inMyRides -->
 
-    
+    {{/if}}
+    <!-- end if Template.subscriptionsReady -->
+
+
 
 
   </div>

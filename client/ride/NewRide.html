@@ -1,8 +1,8 @@
 <template name="NewRide">
   <div class="container" style="position: relative; {{#if isInRideBox}} width:100% {{/if}}">
     <div style="width: 80%">
-    <button class="btn normal-btn {{btnSingleTrip}} fa fa-share"> Single Trip <span class="chinese">单程</span></button>
-    <button class="btn normal-btn {{btnRoundTrip}} fa fa-refresh"> Round Trip <span class="chinese">往返</span></button>
+    <button class="btn normal-btn {{btnSingleTrip}} single-trip-js"> <i class="fa fa-share"></i> Single Trip <span class="chinese">单程</span></button>
+    <button class="btn normal-btn {{btnRoundTrip}} round-trip-js"> <i class="fa fa-refresh"></i> Round Trip <span class="chinese">往返</span></button>
     <i class="btn-danger cancel-new-ride-js fa fa-close"> </i>
     </div>
     <form class="add-ride-js">
@@ -20,16 +20,19 @@
                 <div class="radios">
 
                   <div class="wrapper-inline">
-                    <input class="radio-inline" type="radio" name="radio1" value="1" id="radio1-1">
-                    <label for="radio1-1">Purdue to Chicago</label>
+                    <input class="radio-inline" type="radio" name="radio1" value="1" id="{{rideId}}-radio1-1" 
+                    checked="{{isChecked 'trip1' 1}}">
+                    <label for="{{rideId}}-radio1-1">Purdue to Chicago</label>
                   </div>
                   <div class="wrapper-inline">
-                    <input class="radio-inline" type="radio" name="radio1" value="2" id="radio1-2">
-                    <label for="radio1-2">Chicago to Purdue</label>
+                    <input class="radio-inline" type="radio" name="radio1" value="2" id="{{rideId}}-radio1-2"
+                     checked="{{isChecked 'trip1' 2}}">
+                    <label for="{{rideId}}-radio1-2">Chicago to Purdue</label>
                   </div>
                   <div class="wrapper-inline">
-                    <input class="radio-inline" type="radio" name="radio1" value="3" id="radio1-3" checked>
-                    <label for="radio1-3">Other Routes</label>
+                    <input class="radio-inline" type="radio" name="radio1" value="3" id="{{rideId}}-radio1-3"
+                     checked="{{isChecked 'trip1' 3}}">
+                    <label for="{{rideId}}-radio1-3">Other Routes</label>
 
                   </div>
                 </div>
@@ -37,25 +40,25 @@
               </div>
 
               <div class="form-group">
-                <label class="required" for="from1">From:</label>
-                <input type="text" maxlength="40" class="form-control" required id="from1" placeholder="Start from" name="from1" />
+                <label class="required" for="{{rideId}}-from1">From:</label>
+                <input type="text" maxlength="40" class="form-control" required id="{{rideId}}-from1" placeholder="Start from" name="from1" value="{{trip1.from}}" />
               </div>
               <div class="form-group">
-                <label class="required" for="to1">To:</label>
-                <input type="text" maxlength="40" class="form-control" required id="to1" placeholder="Travel destination" name="to1" />
+                <label class="required" for="{{rideId}}-to1">To:</label>
+                <input type="text" maxlength="40" class="form-control" required id="{{rideId}}-to1" placeholder="Travel destination" name="to1" value="{{trip1.to}}"/>
               </div>
               <div class="form-group">
-                <label class="required" for="date1">Date:</label>
-                <input type="text" class="form-control datepicker" placeholder="yyyy-mm-dd" required id="date1" name="date1" />
+                <label class="required" for="{{rideId}}-date1">Date:</label>
+                <input type="text" class="form-control datepicker" placeholder="yyyy-mm-dd" required id="{{rideId}}-date1" name="date1" value="{{date 'trip1'}}"/>
               </div>
               <div class="form-group">
-                <label class="required" for="time1">Time:</label>
-                <input type="text" maxlength="40" class="form-control" required id="time1" placeholder="Exact or approximate time" name="time1" />
+                <label class="required" for="{{rideId}}-time1">Time:</label>
+                <input type="text" maxlength="40" class="form-control" required id="{{rideId}}-time1" placeholder="Exact or approximate time" name="time1" value="{{trip1.time}}" />
               </div>
 
               <div class="form-group">
-                <label for="description1">Description:</label>
-                <textarea class="form-control" maxlength="300" id="description1" placeholder="Any description you want to tell the public. e.g. price or free, your gender, smoke or not, etc." name="description1"></textarea>
+                <label for="{{rideId}}-description1">Description:</label>
+                <textarea class="form-control" maxlength="300" id="{{rideId}}-description1" placeholder="Any description you want to tell the public. e.g. price or free, your gender, smoke or not, etc." name="description1" value="{{trip1.description}}"></textarea>
               </div>
             </div>
           </div>
@@ -73,43 +76,43 @@
                 </label>
                 <div class="radios">
                   <div class="wrapper-inline">
-                    <input class="radio-inline" type="radio" name="radio2" value="1" id="radio2-1">
-                    <label for="radio2-1">Purdue to Chicago</label>
+                    <input class="radio-inline" type="radio" name="radio2" value="1" id="{{rideId}}-radio2-1" checked="{{isChecked 'trip2' 1}}">
+                    <label for="{{rideId}}-radio2-1">Purdue to Chicago</label>
                   </div>
 
                   <div class="wrapper-inline">
-                    <input class="radio-inline" type="radio" name="radio2" value="2" id="radio2-2">
-                    <label for="radio2-2">Chicago to Purdue</label>
+                    <input class="radio-inline" type="radio" name="radio2" value="2" id="{{rideId}}-radio2-2" checked="{{isChecked 'trip2' 2}}">
+                    <label for="{{rideId}}-radio2-2">Chicago to Purdue</label>
                   </div>
 
                   <div class="wrapper-inline">
-                    <input class="radio-inline" type="radio" name="radio2" value="3" id="radio2-3" checked>
-                    <label for="radio2-3">Other Routes</label>
+                    <input class="radio-inline" type="radio" name="radio2" value="3" id="{{rideId}}-radio2-3"  checked="{{isChecked 'trip2' 3}}">
+                    <label for="{{rideId}}-radio2-3">Other Routes</label>
                   </div>
 
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="required" for="from2">From:</label>
-                <input type="text" maxlength="40" class="form-control" required id="from2" placeholder="Start from" name="from2" />
+                <label class="required" for="{{rideId}}-from2">From:</label>
+                <input type="text" maxlength="40" class="form-control" required id="{{rideId}}-from2" placeholder="Start from" name="from2" value="{{trip2.from}}"/>
               </div>
               <div class="form-group">
-                <label class="required" for="to2">To:</label>
-                <input type="text" maxlength="40" class="form-control" required id="to2" placeholder="Travel destination" name="to2" />
+                <label class="required" for="{{rideId}}-to2">To:</label>
+                <input type="text" maxlength="40" class="form-control" required id="{{rideId}}-to2" placeholder="Travel destination" name="to2" value="{{trip2.to}}"/>
               </div>
               <div class="form-group">
-                <label class="required" for="date2">Date:</label>
-                <input type="text" class="form-control datepicker" placeholder="yyyy-mm-dd" required id="date2" name="date2" />
+                <label class="required" for="{{rideId}}-date2">Date:</label>
+                <input type="text" class="form-control datepicker" placeholder="yyyy-mm-dd" required id="{{rideId}}-date2" name="date2" value="{{date 'trip2'}}"/>
               </div>
               <div class="form-group">
-                <label class="required" for="time2">Time:</label>
-                <input type="text" maxlength="40" class="form-control" required id="time2" placeholder="Exact or approximate time" name="time2" />
+                <label class="required" for="{{rideId}}-time2">Time:</label>
+                <input type="text" maxlength="40" class="form-control" required id="{{rideId}}-time2" placeholder="Exact or approximate time" name="time2" value="{{trip2.time}}"/>
               </div>
 
               <div class="form-group">
-                <label for="description2">Description:</label>
-                <textarea maxlength="300" class="form-control" id="description2" placeholder="Any description you want to tell the public. e.g. price or free, your gender, smoke or not, etc." name="description2"></textarea>
+                <label for="{{rideId}}-description2">Description:</label>
+                <textarea maxlength="300" class="form-control" id="{{rideId}}-description2" placeholder="Any description you want to tell the public. e.g. price or free, your gender, smoke or not, etc." name="description2" value="{{trip2.description}}"></textarea>
               </div>
             </div>
           </div>
@@ -123,8 +126,8 @@
         <div class="center">
 
           <div class="form-group">
-            <label for="contact">Contact (besides Website Internal Message):</label>
-            <input type="text" maxlength="40" class="form-control" id="contact" placeholder="How to contact you?" name="contact" />
+            <label for="{{rideId}}-contact">Contact (besides Website Internal Message):</label>
+            <input type="text" maxlength="40" class="form-control" id="{{rideId}}-contact" placeholder="How to contact you?" name="contact" value="{{contact}}"/>
           </div>
         </div>
       </div>

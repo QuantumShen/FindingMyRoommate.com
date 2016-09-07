@@ -11,7 +11,7 @@ $break-medium : 767px;
 $break-large: 1023px;
 
 @mixin trans($sec){
-    transition: all $sec ease;
+	transition: all $sec ease;
 }
 
 
@@ -49,7 +49,7 @@ $break-large: 1023px;
 }
 
 
-section.new-ride-form{
+.new-ride-form{
 	margin-top: 10px;
 	.fa-close{
 		position:absolute; 
@@ -144,6 +144,9 @@ section.rides-list{
 	.nav-tabs > li > a {
 		text-align: center;
 	}
+	.grey-bg{
+		background-color: $mycolor-lightgrey;
+	}
 
 	.ride-box{
 		
@@ -160,7 +163,7 @@ section.rides-list{
 
 		position: relative;
 
-		.ride-direction, .fa-trash, .fa-pencil{
+		.ride-direction, .fa-trash, .fa-pencil, .fa-toggle-on, .fa-toggle-off{
 			opacity:0.3;
 			cursor:pointer;
 			position:absolute;
@@ -185,10 +188,17 @@ section.rides-list{
 				opacity:0.8;
 			}
 		}
+		.fa-toggle-on, .fa-toggle-off{
+			right: 90px;
+			&:hover{
+				color:$mycolor-darkorange;
+				opacity: 1;
+			}
+		}
 
 		.ride-direction{
-			top: -35px;
-			left: 5px;
+			
+			left: 40px;
 			font-size: 1.2em;
 			line-height: 1em;
 			cursor: default;
@@ -205,9 +215,19 @@ section.rides-list{
 			}
 		}
 
+		.created-at{
+			position: absolute;
+			bottom: 10px;
+			right: 20px;
+			padding: 0;
+			font-size: 0.8em;
+			opacity: 0.8;
+		}
+
+
 
 		.ride-inner-box{
-			padding: 40px 3% 20px 3%;
+			padding: 40px 3% 30px 3%;
 		}
 
 		.avatar.avatar-circle{
@@ -250,7 +270,7 @@ section.rides-list{
 				border-radius: 4px;
 				border: 2px solid $mycolor-darkblue;
 				margin-top: 5px;
-				margin-bottom: 5px;
+				margin-bottom: 10px;
 				font-weight: bold;
 
 			}
@@ -261,7 +281,7 @@ section.rides-list{
 
 			.date, .time{
 				margin-left: 15px;
-				padding-left: 10px;
+				padding: 5px 0 5px 10px;
 			}
 
 			.time{
@@ -275,6 +295,7 @@ section.rides-list{
 			hr{
 				margin-left: 15px;
 			}
+
 		}
 		hr{
 			border-top: 2px solid $mycolor-darkgrey;

@@ -16,13 +16,13 @@ Template.NewRide.onRendered(function(){
     }    
 
     this.autorun(()=>{
-        $('#date1').datepicker({
+        this.$("input[name='date1']" ).datepicker({
             dateFormat: 'yy-mm-dd'
         });
 
         if(this.roundTrip.get()){
             Tracker.afterFlush(()=>{
-                $('#date2').datepicker({
+                this.$("input[name='date2']" ).datepicker({
                     dateFormat: 'yy-mm-dd'
                 });
             });
@@ -56,23 +56,22 @@ function checkStringNotEmpty(str, result){
 }
 
 Template.NewRide.events({
-    'click .fa-share': function(events,instance) {
+    'click .single-trip-js': function(events,instance) {
         instance.roundTrip.set(false);
     },
-    'click .fa-refresh': function(events,instance) {
+    'click .round-trip-js': function(events,instance) {
         instance.roundTrip.set(true);
     },
 
     'submit .add-ride-js': function(event, instance){
         event.preventDefault();
 
-
         if(Meteor.user()){
             var t = event.target;
             var ckResult = instance.ckResult;
             var doc = {
                 roundTrip: instance.roundTrip.get(),
-                offerRide: instance.provideRide,
+                offerRide: instance.provideRide.get(),
                 trip1:{
                     category: parseInt(checkStringNotEmpty(t.radio1.value, ckResult)),
                     from: checkStringNotEmpty(t.from1.value, ckResult),
@@ -109,7 +108,7 @@ Template.NewRide.events({
 
             doc.activeTo = new Date(activeTo);
             doc.activeTo.setDate(doc.activeTo.getDate()+1); //active to the end of the day
-            Meteor.call('insertRide', doc, function(error, result){
+            Meteor.call('insertRide', doc, this._id, function(error, result){
                 if(error){
                     Bert.alert( 'Input Error! Try to limit the required fields to less than 40 characters.', 'danger', 'fixed-top', 'fa-frown-o' );
                     return false;
@@ -119,7 +118,18 @@ Template.NewRide.events({
                     return false;
                 }
             });
-            Session.set('newRide', false);
+
+            if(instance.updateRide.get()){  //this is an update form inside a ride
+
+                var parent = instance.view.parentView;
+                while(parent.name !== 'Template.Ride'){
+                    parent = parent.parentView;
+                }
+                parent.templateInstance().editMode.set(false);
+            }else{
+                Session.set('newRide', false);
+            }
+
             Bert.alert( 'Successfully Published', 'success', 'fixed-top', 'fa-smile-o' );
         }//end if
 
@@ -127,9 +137,18 @@ Template.NewRide.events({
         return false; //no default submit
     },
 
+    'click .cancel-new-ride-js': function(event, instance){
+        if(instance.updateRide.get()){  //this is an update form inside a ride
 
-    'click .cancel-new-ride-js': () => {
-        Session.set('newRide', false);
+            var parent = instance.view.parentView;
+            while(parent.name !== 'Template.Ride'){
+                parent = parent.parentView;
+            }
+            parent.templateInstance().editMode.set(false);
+        }else{
+            Session.set('newRide', false);
+        }
+        
     }
 
 });
@@ -160,6 +179,28 @@ Template.NewRide.helpers({
     },
     'isInRideBox'(){
         return Template.instance().updateRide.get();
-    }
+    },
+    'rideId'(){
+        if(this._id){
+            return this._id;
+        }else{
+            return "creating";
+        }
+    },
+    isChecked: function(trip, n){
+        if(this[trip]){
+            return (this[trip].category === n)? true : false;
+        }else{
+            return (n === 3)? true : false;
+        }
+    },
+    date: function(trip){
+        if(this[trip]){
+            return $.datepicker.formatDate('yy-mm-dd', this[trip].date);
+        }else{
+            return;
+        }
+        
+    },
 
 });

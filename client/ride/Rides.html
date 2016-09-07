@@ -2,28 +2,28 @@
   <div class="container">
 
     <section class="row new-ride-form">
-    <div class="container">
-      <div class="col-sm-8">
-        <div class="row">
-          <div class="col-xs-6" style="padding-top: 20px; padding-bottom:20px">
-            <div class="title alert alert-info" title="Share A Ride">Share A Ride<span class="chinese"> 拼车 </span>
+      <div class="container">
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col-xs-6" style="padding-top: 5px; padding-bottom:5px">
+              <div class="title alert alert-info" title="Share A Ride">Share A Ride <br><span class="chinese"> 拼车 </span>
+              </div>
+            </div>
+            <div class="col-xs-6"  style="padding-top: 20px; padding-bottom:20px">
+              <p class="service-info"> Start or join a ride share</p>
+              <p class="service-info chinese">发布或寻找拼车信息</p>
             </div>
           </div>
-          <div class="col-xs-6"  style="padding-top: 20px; padding-bottom:20px">
-            <p class="service-info"> Start or join a ride share</p>
-            <p class="service-info chinese">发布或寻找拼车信息</p>
+        </div>
+        <div class="col-sm-4">
+          <div class="row">
+            <button class="btn btn-success submit-btn provide-new-ride-js right-button">Offer a ride</button>
+            <button class="btn btn-warning submit-btn looking-for-new-ride-js right-button">Need a ride</button>
           </div>
         </div>
       </div>
-      <div class="col-sm-4">
-        <div class="row">
-          <button class="btn btn-success submit-btn provide-new-ride-js right-button">Offer a ride</button>
-          <button class="btn btn-warning submit-btn looking-for-new-ride-js right-button">Need a ride</button>
-        </div>
-      </div>
-    </div>
       {{#if $.Session.get 'newRide'}} 
-        {{> NewRide}} 
+      {{> NewRide}} 
       {{/if}}
     </section>
 

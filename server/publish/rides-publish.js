@@ -1,9 +1,14 @@
 Meteor.publish('AllActiveRides', function() {
-    var cursor = Rides.find({ active: true }, { sort: { activeTo: 1 } });
+    //var cursor = Rides.find({ active: true }, { sort: { activeTo: 1 } }); //server side sort is meaningless and costly
+    var cursor = Rides.find({ active: true });
     var now = new Date();
     cursor.forEach(function(doc) {
         if (doc.activeTo < now) {
-            Rides.update(doc._id, { $set: { active: false } });
+            Rides.update(doc._id, { $set: {
+                active: false,
+                activeTo: doc.activeTo,
+                createdAt: doc.createdAt
+            } }); //createdAt exists inside, I don't want it to autovalue() again!
         }
     });
     return cursor;
@@ -14,21 +19,40 @@ Meteor.publish('AllActiveRides', function() {
 
 });
 
-Meteor.smartPublish('MyRides', function() {
+//smartPublish allows for cursor from same collection to combine
 
-    var active = Rides.find({ creator: this.userId, active: true }, { sort: { activeTo: 1 } });
+// Meteor.smartPublish('MyRides', function() {
 
-    var inactive = Rides.find({ creator: this.userId, active: false }, { sort: { activeTo: -1 } });
+//     var active = Rides.find({ creator: this.userId, active: true }, { sort: { activeTo: 1 } });
 
-    return [active, inactive];
-    //return inactive;
+//     var inactive = Rides.find({ creator: this.userId, active: false }, { sort: { activeTo: -1 } });
+
+//     return [active, inactive];
+// });
+
+Meteor.publish('MyRides', function() {
+    
+    var cursor = Rides.find({ active: true });
+    var now = new Date();
+    cursor.forEach(function(doc) {
+        if (doc.activeTo < now) {
+            Rides.update(doc._id, { $set: {
+                active: false,
+                activeTo: doc.activeTo,
+                createdAt: doc.createdAt
+            } }); //createdAt exists inside, I don't want it to autovalue() again!
+        }
+    });
+
+    return Rides.find({creator: this.userId});
+
 });
 
 Meteor.publish('PUCHI', function() {
     var cursor = Rides.find({
         active: true,
         $or: [{ "trip1.category": 1 }, { "trip2.category": 1 }],
-    }, { sort: { activeTo: 1 } });
+    });
 
     return cursor;
 });
@@ -37,7 +61,7 @@ Meteor.publish('CHIPU', function() {
     var cursor = Rides.find({
         active: true,
         $or: [{ "trip1.category": 2 }, { "trip2.category": 2 }],
-    }, { sort: { activeTo: 1 } });
+    });
 
     return cursor;
 });
@@ -46,7 +70,7 @@ Meteor.publish('OtherRoutes', function() {
     var cursor = Rides.find({
         active: true, 
         $or: [{"trip1.category" : 3},{"trip2.category" : 3}],
-    },{sort: {activeTo: 1}});
+    });
 
     return cursor;
 });

@@ -93,12 +93,25 @@ RidesSchema = new SimpleSchema({
         type: Boolean,
         label: "activeness",
         autoValue: function(){
+            //THIS is bug-prone:
+            //THIS.field() is not the field in the collection doc, but the field to insert or update!
+            //so, if the doc has not 'activeTo' field, it will be undefined, so it always goes to false branch.
+
+            //By the way, even I have 'active' in the doc to update, it still try to use this autoValue. This is nonsense!
             var activeTo = this.field('activeTo').value;
             if(activeTo >= (new Date())){
-                return true;
+                if(this.field('active').value === undefined){
+                    return true;
+                }else{
+                    //return this.field('active').value;
+                    return; //leave the place with no autovalue.
+                }
+
             }else{
                 return false;
             }
+            
+            //if 'active' exists, just return to use the existing value;
         }
     },
 
@@ -135,7 +148,10 @@ RidesSchema = new SimpleSchema({
 		type: Date,
 		label: "Created At",
 		autoValue: function() {
-			return new Date();
+            if(this.field('createdAt').value === undefined){
+                return new Date();
+            }
+            //when I don't want to update createdAt, I just put createdAt inside the doc to insert or update
 		},
 	},
 

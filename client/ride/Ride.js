@@ -15,7 +15,7 @@ Template.Ride.helpers({
         return Users.findOne({_id: this.creator});
     },
     date: function(trip){
-        return this[trip].date.toDateString();
+        return $.datepicker.formatDate('M dd, yy D', this[trip].date);
     },
     editMode: function(){
         return Template.instance().editMode.get();
@@ -32,13 +32,24 @@ Template.Ride.helpers({
     },
     inMyRides: function(){
         return Session.get('listCategory') === "MyRides";
+    },
+    createdAt: function(){
+        var localDate = new Date(this.createdAt);
+        var hh = localDate.getHours();  // typeof hh returns number
+        if(hh < 10) hh='0'+hh;
+        var mm = localDate.getMinutes();
+        if(mm < 10) mm= '0'+mm;
+        var ss = localDate.getSeconds();
+        if(ss < 10) ss= '0'+ss;
+
+        return $.datepicker.formatDate('yy-mm-dd ', localDate) + hh + ":" +mm + ":" + ss;
     }
 });
 
 Template.Ride.events({
 
-    'click .toggle-activate': function(){
-        Meteor.call('toggleActivate', this._id);
+    'click .toggle-activate-js': function(){
+        Meteor.call('toggleActivate', this._id, this.active);
     },
     'click .fa-trash': function (events, instance) {
 

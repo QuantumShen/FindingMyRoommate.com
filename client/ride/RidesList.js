@@ -7,7 +7,12 @@ Template.RidesList.onCreated(function(){
 });
 
 Template.RidesList.helpers({
-    rides: ()=> {
-        return Rides.find({});
+    rides: function(){
+        if(this.category==="MyRides"){
+            return Rides.find({}, { sort: { createdAt: -1 } });
+        }else{
+            return Rides.find({}, { sort: { activeTo: 1 } });
+        }
+        
     }
 });
