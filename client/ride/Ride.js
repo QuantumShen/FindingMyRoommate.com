@@ -1,10 +1,20 @@
 Template.Ride.onCreated(function(){
     var self = this;
     this.editMode = new ReactiveVar(false);
-    this.confirmDelete = new ReactiveVar(false);//I added this for what? don't remember
+
+    
+    this.marked = new ReactiveVar(false);
+    var rideId = Template.currentData()._id;
+
 
     self.autorun(function() {
         self.subscribe('UserInfo', Template.currentData().creator);
+        var bookmarkList = Session.get('bookmarkList');
+        if(bookmarkList.indexOf(rideId) >= 0){
+            self.marked.set(true);
+        }else{
+            self.marked.set(false);
+        }
     });
 });
 
@@ -43,34 +53,80 @@ Template.Ride.helpers({
         if(ss < 10) ss= '0'+ss;
 
         return $.datepicker.formatDate('yy-mm-dd ', localDate) + hh + ":" +mm + ":" + ss;
+    },
+    marked:function(){
+        return Template.instance().marked.get();
     }
 });
 
 Template.Ride.events({
 
     'click .toggle-activate-js': function(){
-        Meteor.call('toggleActivate', this._id, this.active);
+        var doc = this;
+        if(doc.active){
+            var title = "Confirm Deactivation";
+            var text =  "Other people cannot see it after deactivation. \n You can still reactivate it, \nbut expired ride will be deactivated automatically. ";
+            var buttonText = "Yes, deactivate it!";
+            var errorText = 'Deactivation failed due to error input.';
+            var successText = 'Successfully deactivated one ride.';
+        }else{
+            title = "Confirm Activation";
+            text =  "Other people can see it after activation. \n Note that expired ride cannot be reactivated, \nunless you update the ride date. ";
+            buttonText = "Yes, activate it!";
+            errorText = 'Activation failed due to error input.';
+            successText = 'Successfully activated one ride.';
+            expiredText = 'The ride has expired and deactivated automatically.';
+        }
+        swal({ 
+            title: title, 
+            text: text,
+            type: "warning", 
+            showCancelButton: true, 
+            confirmButtonColor: "#D9534F", 
+            confirmButtonText: buttonText, 
+            closeOnConfirm: true 
+        }, 
+        function() { 
+            Meteor.call('toggleActivate', doc._id, doc.active, function(error, result){
+                if(error || result==-1){
+                    Bert.alert( errorText, 'danger', 'fixed-top', 'fa-frown-o' );
+                    return false;
+                }else if(result === -2){
+                    Bert.alert( expiredText, 'danger', 'fixed-top', 'fa-frown-o' );
+                }else{
+                    Bert.alert(successText , 'success', 'fixed-top', 'fa-smile-o' );
+                }
+            });
+        });
     },
+
+    'click .toggle-bookmark-js': function(event, instance){
+        var userId = Meteor.userId();
+        Meteor.call('toggleBookmark', userId, this._id, instance.marked.get());
+
+    },
+
+
     'click .fa-trash': function (events, instance) {
-
-        //instance.confirmDelete.set(false); 
-        
-
-
-        Meteor.call('deleteRide', this._id, function(error, result){
-            if(error){
-                Bert.alert( 'Input Error! Cannot Delete.', 'danger', 'fixed-top', 'fa-frown-o' );
-                return false;
-            }
-
-            if(result === -1){
-                Bert.alert( 'The Item Belongs To Others! Cannot Delete.', 'danger', 'fixed-top', 'fa-frown-o' );
-
-            }
-
-            else{
-                Bert.alert( 'Successfully Deleted One Ride.', 'success', 'fixed-top', 'fa-smile-o' );
-            }
+        var doc = this;
+        swal({ 
+            title: "Confirm Delete", 
+            text: "You will not be able to recover this ride post after deletion!", 
+            type: "warning", 
+            showCancelButton: true, 
+            confirmButtonColor: "#D9534F", 
+            confirmButtonText: "Yes, delete it!", 
+            closeOnConfirm: true 
+        }, 
+        function() { 
+            Meteor.call('deleteRide', doc._id, function(error, result){
+                if(error || result === -1){
+                    Bert.alert( 'Input error! Cannot delete.', 'danger', 'fixed-top', 'fa-frown-o' );
+                    return false;
+                }else{
+                    Bert.alert( 'Successfully deleted one ride.', 'success', 'fixed-top', 'fa-smile-o' );
+                }
+            });
         });
     },
     'click .fa-pencil': function (event, instance) {

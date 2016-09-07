@@ -139,6 +139,12 @@
 
       <i class="fa fa-trash" title="Delete"></i>
       <i class="fa fa-pencil" title="Edit / Cancel Edit"></i> 
+    {{else}}
+      {{#if marked}}
+      <i class="fa fa-bookmark toggle-bookmark-js" title="Bookmark"></i>
+      {{else}}
+      <i class="fa fa-bookmark-o toggle-bookmark-js" title="Bookmark"></i>
+      {{/if}}
     {{/if}} 
     <!-- end if inMyRides -->
 

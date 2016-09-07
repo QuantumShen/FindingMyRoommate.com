@@ -75,7 +75,17 @@ Meteor.publish('OtherRoutes', function() {
     return cursor;
 });
 
-Meteor.publish('Star', function() {
-    var cursor = Rides.find();
-    return cursor;
+Meteor.publish('Bookmarked', function() {
+    var doc = Users.findOne(this.userId, {
+        fields:{
+            bookmarkList: 1,
+        }
+    });
+    if(doc && doc.bookmarkList){
+        return Rides.find({_id: {$in: doc.bookmarkList}});
+    }else{
+        return this.ready();
+
+    }
+    
 });

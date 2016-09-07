@@ -5,6 +5,7 @@ $mycolor-lightgrey: #DADADA;
 $mycolor-darkgreen: #3c763d;
 $mycolor-darkred: #A94442; 
 $mycolor-darkorange: #8A6D3B;
+$mycolor-red: #D9534F;
 
 $break-small: 319px;
 $break-medium : 767px;
@@ -163,7 +164,7 @@ section.rides-list{
 
 		position: relative;
 
-		.ride-direction, .fa-trash, .fa-pencil, .fa-toggle-on, .fa-toggle-off{
+		.ride-direction, .fa-trash, .fa-pencil, .fa-toggle-on, .fa-toggle-off, .fa-bookmark, .fa-bookmark-o{
 			opacity:0.3;
 			cursor:pointer;
 			position:absolute;
@@ -194,6 +195,19 @@ section.rides-list{
 				color:$mycolor-darkorange;
 				opacity: 1;
 			}
+		}
+
+		.fa-bookmark-o{
+			right: 30px;
+			&:hover{
+				color: $mycolor-red;
+				opacity: 1;
+			}
+		}
+		.fa-bookmark{
+			right: 30px;
+			color: $mycolor-red;
+			opacity: 1;
 		}
 
 		.ride-direction{
