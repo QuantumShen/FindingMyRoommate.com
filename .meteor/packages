@@ -37,7 +37,7 @@ useraccounts:bootstrap
 matb33:bootstrap-glyphicons
 zimme:active-route
 gwendall:auth-client-callbacks
-meteortoys:allthings
+
 datariot:ganalytics
 check@1.2.3
 twbs:bootstrap
@@ -47,3 +47,4 @@ utilities:avatar
 mizzao:jquery-ui
 shell-server
 kit:sweetalert
+tmeasday:publish-counts

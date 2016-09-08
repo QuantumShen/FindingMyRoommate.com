@@ -1,3 +1,8 @@
+Template.ServiceEntrance.onCreated(function(){
+    this.autorun(()=> {
+        this.subscribe('RidesCount');
+    });      
+});
 Template.ServiceEntrance.helpers({
     services:[
         {
@@ -8,7 +13,9 @@ Template.ServiceEntrance.helpers({
             description:"Start or join a ride share",
             chineseDescription: "发布或寻找拼车信息",
             activeName: "Active Rides",
-            activeNumber: 10, //todo
+            activeNumber: function(){
+                return Counts.get("rides-count");
+            }, //todo
         },
         {
             path:"/roommates",
@@ -18,7 +25,7 @@ Template.ServiceEntrance.helpers({
             description:"Start or join a roommates group",
             chineseDescription: "找室友一起租房子",
             activeName: "Active Groups",
-            activeNumber: 10, //todo
+            activeNumber: 0, //todo
         },{
             path:"/subleases",
             imgPath:"/images/sublease.png",
@@ -27,7 +34,7 @@ Template.ServiceEntrance.helpers({
             description:"Provide or ask for sublease",
             chineseDescription: "提供或寻找转租",
             activeName: "Active Subleases",
-            activeNumber: 10, //todo
+            activeNumber: 0, //todo
         },
 
     ]

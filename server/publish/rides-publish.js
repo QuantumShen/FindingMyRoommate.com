@@ -89,3 +89,8 @@ Meteor.publish('Bookmarked', function() {
     }
     
 });
+
+
+Meteor.publish("RidesCount",function(){
+  Counts.publish(this,"rides-count",Rides.find({ active: true }));
+});

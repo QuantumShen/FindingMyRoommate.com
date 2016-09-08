@@ -66,7 +66,14 @@ Meteor.methods({
 
         
         //PS: expired ride won't appear, so not check expiration of rideId here.
-    }   
+    },
+
+    countRides: function(){
+        var count = Rides.find({ active: true }).count();
+        
+        return count;
+
+    }
 
 
 });

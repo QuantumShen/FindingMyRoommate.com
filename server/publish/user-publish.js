@@ -16,7 +16,7 @@ Meteor.publish('UserRideBookmark', function(userId){
     });
     //for..in.. returns each key in hashset/object/array
     //for(var rideId in doc.bookmarkList){
-    console.log(userId, doc.bookmarkList);
+    // console.log(userId, doc.bookmarkList);
     if(doc && doc.bookmarkList){
         doc.bookmarkList.forEach(function(rideId){
             //test whether each ride still exists
